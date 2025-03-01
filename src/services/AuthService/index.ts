@@ -62,10 +62,20 @@ export const reCaptchaValidation = async (token: string) => {
     }
 }
 
-export const logout =  async ()=>{
+export const logout = async () => {
     try {
-       (await cookies()).delete('accessToken')
-    } catch (error : any) {
+        (await cookies()).delete('accessToken')
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+
+export const getAllUser = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users`)
+        const result = await res.json();
+        return result;
+    } catch (error: any) {
         return Error(error)
     }
 }
