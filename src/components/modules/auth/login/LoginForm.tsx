@@ -1,23 +1,37 @@
 
 "use client"
-
+import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginUser, registerUser } from "@/services/AuthService";
+import { loginUser, reCaptchaValidation, registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginValidationSchema } from "./loginValidation";
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginForm = () => {
     const form = useForm({
         resolver: zodResolver(loginValidationSchema)
     });
-    const { formState: { isSubmitting } , reset} = form;
+    const [reCaptchaStatue, setReCaptchaStatue] = useState(false)
+
+    const { formState: { isSubmitting }, reset } = form;
     const router = useRouter();
+
+    const handleReCaptcha = async (value: string | null) => {
+        try {
+            const res = await reCaptchaValidation(value!)
+            if (res?.success) {
+                setReCaptchaStatue(true)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastLoading = toast.loading("Logging...")
@@ -28,7 +42,7 @@ const LoginForm = () => {
                 toast.success(res?.message, { id: toastLoading })
                 reset();
                 router.push('/')
-            } else{
+            } else {
                 toast.error("Something went wrong!", { id: toastLoading })
             }
         } catch (error: any) {
@@ -77,7 +91,15 @@ const LoginForm = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+
+
+                        <div className="flex justify-end items-center">
+                            <ReCAPTCHA
+                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+                                onChange={handleReCaptcha}
+                            />
+                        </div>
+                        <Button disabled={reCaptchaStatue ? false : true} type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                             {isSubmitting ? "Logging..." : "Login"}
                         </Button>
                         <p className="text-right pr-2 text-xl">Don't have an account <Link className="text-[#ff8e00] underline" href={'/register'}>Register</Link></p>
