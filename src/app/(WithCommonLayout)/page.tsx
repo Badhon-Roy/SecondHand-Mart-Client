@@ -7,14 +7,16 @@ import { getAllCategory } from "@/services/category";
 import { getAllListing } from "@/services/listing";
 
 const HomePage = async () => {
-  const {data : categories} = await getAllCategory();
-  const {data: listings} = await getAllListing();
+  const { data: categories } = await getAllCategory();
+  const { data: listings } = await getAllListing();
   return (
     <div className="container mx-auto">
-      <Banner />
-      <Category categories={categories || []}/>
-      <FeaturedProducts listings={listings || []}/>
-      <ManageListingTabs listings={listings || []}/>
+      <div className="md:mx-0 mx-4">
+        <Banner />
+        <Category categories={categories || []} />
+        <FeaturedProducts listings={listings || []} />
+        <ManageListingTabs listings={listings || []} />
+      </div>
     </div>
   );
 };

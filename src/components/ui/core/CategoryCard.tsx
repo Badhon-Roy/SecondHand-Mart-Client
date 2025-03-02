@@ -8,7 +8,7 @@ const CategoryCard = ({ category }: { category: ICategory }) => {
     const { name, image } = category;
     return (
         <div>
-            <Link href={`/category/${name}`}>
+            <Link href={`/products?category=${name}`}>
                 <Card className="p-3 bg-white shadow-lg rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full">
                     <CardHeader className="relative p-0 h-[180px] overflow-hidden">
                         <Image

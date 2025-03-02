@@ -14,25 +14,26 @@ import Link from "next/link";
 
 const RegisterForm = () => {
     const form = useForm({
-        resolver : zodResolver(registerValidationSchema)
+        resolver: zodResolver(registerValidationSchema)
     });
-     const {formState: {isSubmitting} , reset} = form
+    const { formState: { isSubmitting }, reset } = form
     const router = useRouter();
 
-    const onSubmit: SubmitHandler<FieldValues> = async(data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        console.log(data);
         const toastLoading = toast.loading("Registering...")
         try {
             const res = await registerUser(data)
             console.log(res);
-            if(res.success){
-                toast.success("Register Successful", {id : toastLoading})
+            if (res.success) {
+                toast.success("Register Successful", { id: toastLoading })
                 reset();
                 router.push('/login')
-            }else if(res.err){
-                toast.error(res?.message || "Something went wrong!" ,{id : toastLoading})
+            } else if (res.err) {
+                toast.error(res?.message || "Something went wrong!", { id: toastLoading })
             }
-        } catch (error : any) {
-            toast.error(error.message,{id : toastLoading})
+        } catch (error: any) {
+            toast.error(error.message, { id: toastLoading })
         }
     }
     return (
@@ -73,7 +74,25 @@ const RegisterForm = () => {
                                             value={field.value || ''}
                                         />
                                     </FormControl>
-                                    <FormMessage className="text-red-500"/>
+                                    <FormMessage className="text-red-500" />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="phoneNumber"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-lg font-medium">Phone Number</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="w-full py-5 px-4 rounded-[4px] shadow-md"
+                                            placeholder="Enter your phone number"
+                                            {...field}
+                                            value={field.value || ''}
+                                        />
+                                    </FormControl>
+                                    <FormMessage className="text-red-500" />
                                 </FormItem>
                             )}
                         />
@@ -109,14 +128,14 @@ const RegisterForm = () => {
                                             value={field.value || ''}
                                         />
                                     </FormControl>
-                                    <FormMessage className="text-red-500"/>
+                                    <FormMessage className="text-red-500" />
                                 </FormItem>
                             )}
                         />
                         <Button type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                             {isSubmitting ? "Registering..." : "Register"}
                         </Button>
-                        <p className="text-right pr-2 text-xl">Have an account <Link className="text-[#ff8e00] underline"  href={'/login'}>Login now</Link></p>
+                        <p className="text-right pr-2 text-xl">Have an account <Link className="text-[#ff8e00] underline" href={'/login'}>Login now</Link></p>
                     </form>
                 </Form>
             </div>

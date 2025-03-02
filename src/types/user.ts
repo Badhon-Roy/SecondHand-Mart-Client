@@ -4,6 +4,7 @@ export interface IUser{
     email: string
     role: 'admin'| 'user'
     password: string
+    phoneNumber: string
     avatar?: string
     createdAt: string
     updatedAt: string

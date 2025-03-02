@@ -9,6 +9,7 @@ import Image from 'next/image';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/products', label: 'Products' },
+  { href: '/categories', label: 'Categories' },
 ];
 import {
   DropdownMenu,

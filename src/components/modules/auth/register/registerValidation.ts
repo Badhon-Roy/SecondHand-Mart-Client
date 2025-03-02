@@ -12,5 +12,9 @@ export const registerValidationSchema = z.object({
     password: z
         .string({ required_error: "Password is requires" })
         .min(6, "Password must be at least 6 characters")
-        .max(8, "Password maximum 8 characters")
+        .max(8, "Password maximum 8 characters"),
+    phoneNumber: z
+        .string({ required_error: "Phone number is requires" })
+        .min(6, "Phone number must be at least 6 numbers")
+        .max(15, "Phone number maximum 15 numbers")
 })

@@ -18,7 +18,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
     const { title, price, images, status } = product;
 
     return (
-        <Card className="p-3 bg-white shadow-lg rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full">
+        <Card className="p-3 bg-white shadow-lg rounded-lg h-[420px] transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full">
             <CardHeader className="relative p-0 h-56 overflow-hidden">
                 <Image
                  className="rounded-t-lg h-56 w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105 hover:rounded-lg"
