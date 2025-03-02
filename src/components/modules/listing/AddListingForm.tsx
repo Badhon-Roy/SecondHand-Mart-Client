@@ -27,7 +27,7 @@ const AddListingForm = ({ userId, categories }: IAddListingFormProps) => {
         const modifiedData = {
             ...data,
             price: parseFloat(data?.price),
-            images: [data?.images1, data?.images1],
+            images: [data?.images1, data?.images2],
             userID: userId,
         }
         console.log(modifiedData);

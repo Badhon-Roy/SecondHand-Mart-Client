@@ -4,23 +4,23 @@ import { revalidateTag } from "next/cache";
 import { FieldValues } from "react-hook-form";
 
 
-export const addListing = async (listingData: FieldValues) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings`, {
+export const addFavorite = async (data: FieldValues) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/favorites`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(listingData)
+        body: JSON.stringify(data)
     })
-    revalidateTag("LISTING")
+    revalidateTag("FAVORITE")
     return res.json();
 }
 
-export const getAllListing = async () => {
+export const getAllFavorite = async (email : string) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/favorites?email=${email}`, {
             next: {
-                tags: ["LISTING"]
+                tags: ["FAVORITE"]
             }
         })
         const result = await res.json();
@@ -30,11 +30,11 @@ export const getAllListing = async () => {
     }
 }
 
-export const getSingleListing = async (id: string) => {
+export const getSingleFavorite = async (id: string) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/favorites/${id}`, {
             next: {
-                tags: ["LISTING"]
+                tags: ["FAVORITE"]
             }
         });
         const result = await res.json();
@@ -45,15 +45,15 @@ export const getSingleListing = async (id: string) => {
 };
 
 
-export const deleteListing = async (listingId: string) => {
+export const deleteFavorite = async (id: string) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings/${listingId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/favorites/${id}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        revalidateTag("LISTING");
+        revalidateTag("FAVORITE");
         return res.json();
     } catch (error: any) {
         return Error(error)

@@ -31,11 +31,11 @@ const ManageProducts = ({ products }: { products: IListing[] }) => {
                 </div>
                 {
                     search && filterByCategoryProducts?.length > 0 ?
-                        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 md:mt-0 mt-8">
+                        <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
                             {filterByCategoryProducts?.map((product: IListing, idx: number) => (
                                 <ProductCard key={idx} product={product} />
                             ))}
-                        </div> : <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 md:mt-0 mt-8">
+                        </div> : <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
                             {products?.map((product: IListing, idx: number) => (
                                 <ProductCard key={idx} product={product} />
                             ))}

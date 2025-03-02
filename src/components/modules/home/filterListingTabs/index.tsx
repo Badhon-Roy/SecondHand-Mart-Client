@@ -44,7 +44,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
 
                     <TabsContent value="new" className="mt-8">
                         {
-                            newProducts?.length > 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+                            newProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                             {
                                 newProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }
@@ -53,7 +53,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
                     </TabsContent>
                     <TabsContent value="used" className="mt-8">
                         {
-                            usedProducts?.length > 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+                            usedProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                             {
                                 usedProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }
@@ -62,7 +62,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
                     </TabsContent>
                     <TabsContent value="refurbished" className="mt-8">
                         {
-                            refurbishedProducts?.length > 0 ? <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+                            refurbishedProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                             {
                                 refurbishedProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { LayoutDashboard, LogOut, Menu, User, X } from 'lucide-react';
+import { Heart, LayoutDashboard, LogOut, Menu, User, X } from 'lucide-react';
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import Image from 'next/image';
 const navLinks = [
@@ -28,13 +28,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
-  const {user, setIsLoading} = useUser();
+  const { user, setIsLoading } = useUser();
 
 
   const handleLogOut = () => {
     logout();
     setIsLoading(true)
-  } 
+  }
 
   return (
     <nav className="text-black shadow-md p-4 sticky top-0 z-[30] bg-white">
@@ -60,34 +60,34 @@ export default function Navbar() {
           ))}
 
           {
-            user && user?.email ?    <div className='z-[100]'>
-            <DropdownMenu >
-              <DropdownMenuTrigger asChild>
-                <Image src={'https://images.vexels.com/media/users/3/147101/isolated/preview/b4a49d4b864c74bb73de63f080ad7930-instagram-profile-button.png?w=360'}
-                  alt='avatar' width={50} height={50} className='rounded-full cursor-pointer'></Image>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel className='text-xl text-center font-bold'>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <Link href={'/profile'}>
-                    <div className='hover:bg-[#ff8e00] w-full px-4 py-2 rounded-[4px] hover:font-bold hover:text-white flex items-center gap-2'>
-                      <User />  Profile
-                    </div>
-                  </Link>
-                  <Link href={'/user/dashboard'}>
-                    <div className='hover:bg-[#ff8e00] w-full px-4 py-2 rounded-[4px] hover:font-bold hover:text-white flex items-center gap-2'>
-                      <LayoutDashboard /> Dashboard
-                    </div>
-                  </Link>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <Button onClick={handleLogOut} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 w-full rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
-                  <LogOut /> Log out
-                </Button>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div> :   <Link
+            user && user?.email ? <div className='z-[100]'>
+              <DropdownMenu >
+                <DropdownMenuTrigger asChild>
+                  <Image src={'https://images.vexels.com/media/users/3/147101/isolated/preview/b4a49d4b864c74bb73de63f080ad7930-instagram-profile-button.png?w=360'}
+                    alt='avatar' width={50} height={50} className='rounded-full cursor-pointer'></Image>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel className='text-xl text-center font-bold'>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <Link href={'/favorite'}>
+                      <div className='hover:bg-[#ff8e00] w-full px-4 py-2 rounded-[4px] hover:font-bold hover:text-white flex items-center gap-2'>
+                        <Heart />  Favorite
+                      </div>
+                    </Link>
+                    <Link href={'/user/dashboard'}>
+                      <div className='hover:bg-[#ff8e00] w-full px-4 py-2 rounded-[4px] hover:font-bold hover:text-white flex items-center gap-2'>
+                        <LayoutDashboard /> Dashboard
+                      </div>
+                    </Link>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <Button onClick={handleLogOut} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 w-full rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                    <LogOut /> Log out
+                  </Button>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div> : <Link
               key={'/login'}
               href={'/login'}
               className={`px-4 py-2 rounded-md transition-colors ${pathname === '/login' ? 'text-[#ff8e00] font-bold text-xl' : 'font-medium text-xl'}`}
@@ -96,7 +96,7 @@ export default function Navbar() {
             </Link>
           }
 
-       
+
 
         </div>
 

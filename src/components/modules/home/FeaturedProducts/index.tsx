@@ -24,7 +24,7 @@ const FeaturedProducts = async ({ listings }: { listings: IListing[] }) => {
                     View All
                 </Button></Link>
             </div>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 my-8">
+            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 my-8">
                 {
                     listings?.slice(0,8)?.map((listing: IListing) => (
                         <ProductCard key={listing?._id} product={listing} />
