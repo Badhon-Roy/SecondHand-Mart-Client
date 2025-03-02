@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Laptop",
+        "description": "A gently used Dell XPS 13 with an Intel Core i7, 16GB RAM, and 512GB SSD. In excellent condition.",
+        "image": "https://img.freepik.com/free-photo/market-trends-concept-with-laptop_23-2150372404.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Smartphone",
+        "description": "iPhone 12 Pro, 256GB storage, minor scratches on the back. Battery health at 85%.",
+        "image": "https://img.freepik.com/premium-photo/tech-device-with-nature-background_23-2150470431.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Gaming Console",
+        "description": "PlayStation 5, barely used, includes two controllers and three popular games.",
+        "image": "https://img.freepik.com/premium-photo/vr-virtual-reality-equipment-table_127657-18074.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Bicycle",
+        "description": "Trek Mountain Bike, 21-speed, well-maintained, recently serviced.",
+        "image": "https://img.freepik.com/free-photo/white-bicycle-standing-park_1153-7319.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Smartwatch",
+        "description": "Samsung Galaxy Watch 4, used for 6 months, fully functional with charger included.",
+        "image": "https://img.freepik.com/premium-photo/black-smartwatch-white-background_1034414-61106.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Office Chair",
+        "description": "Ergonomic mesh office chair with adjustable armrests and lumbar support.",
+        "image": "https://img.freepik.com/free-photo/ergonomic-office-chair-featuring-adjustable-features-within-welllit-workspace_157027-2991.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Headphones",
+        "description": "Sony WH-1000XM4 noise-canceling headphones, excellent condition, with carrying case.",
+        "image": "https://img.freepik.com/free-photo/headphones-displayed-against-dark-background_157027-4466.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Camera",
+        "description": "Canon EOS 90D DSLR Camera with 18-135mm lens, barely used, no scratches.",
+        "image": "https://img.freepik.com/free-photo/photo-camera-still-life_23-2150630955.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    },
+    {
+        "name": "Table",
+        "description": "Solid wood dining table, 6-seater, minor scratches but very sturdy.",
+        "image": "https://img.freepik.com/premium-photo/wooden-table-product-showing-empty_152359-680.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid"
+    }
+]

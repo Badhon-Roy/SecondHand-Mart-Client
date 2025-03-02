@@ -7,28 +7,37 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { addListing } from "@/services/listing";
+import { ICategory } from "@/types";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const AddListingForm = (userId : any) => {
-    console.log(userId?.userId);
+interface IAddListingFormProps {
+    userId: string;
+    categories: ICategory[];
+}
+
+const AddListingForm = ({ userId, categories }: IAddListingFormProps) => {
+
     const form = useForm();
-    const { formState: { isSubmitting } } = form;
+    const { formState: { isSubmitting }, reset } = form;
+    const router = useRouter();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const modifiedData ={
+        const modifiedData = {
             ...data,
-            price : parseFloat(data?.price),
-            images: [data?.images1 , data?.images1],
-            userID: userId?.userId,
+            price: parseFloat(data?.price),
+            images: [data?.images1, data?.images1],
+            userID: userId,
         }
         console.log(modifiedData);
         const toastLoading = toast.loading("Adding...")
         try {
             const res = await addListing(modifiedData)
-            console.log(res);
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
+                reset();
+                router.push('/user/dashboard/listing')
             } else {
                 toast.error("Something went wrong!", { id: toastLoading })
             }
@@ -78,7 +87,7 @@ const AddListingForm = (userId : any) => {
                                 </FormItem>
                             )}
                         />
-                        
+
                         <FormField
                             control={form.control}
                             name="images2"
@@ -97,7 +106,7 @@ const AddListingForm = (userId : any) => {
                                 </FormItem>
                             )}
                         />
-                      
+
 
                         <FormField
                             control={form.control}
@@ -118,31 +127,66 @@ const AddListingForm = (userId : any) => {
                                 </FormItem>
                             )}
                         />
+
+
+                        <div className="flex items-center justify-between">
                         <FormField
-                            control={form.control}
-                            name="condition"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-lg font-medium">Condition</FormLabel>
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder="Select a condition" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Condition</SelectLabel>
-                                                    <SelectItem value="new">New</SelectItem>
-                                                    <SelectItem value="used">Used</SelectItem>
-                                                    <SelectItem value="refurbished">Refurbished</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage className="text-red-500" />
-                                </FormItem>
-                            )}
-                        />
+                                control={form.control}
+                                name="category"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-lg font-medium">Category</FormLabel>
+                                        <FormControl>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select a category" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Category</SelectLabel>
+
+                                                        {categories?.map((category: ICategory) => (
+                                                            <SelectItem key={category?._id} value={category?._id}>
+                                                                {category?.name}
+                                                            </SelectItem>
+                                                        ))}
+
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage className="text-red-500" />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="condition"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-lg font-medium">Condition</FormLabel>
+                                        <FormControl>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select a condition" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Condition</SelectLabel>
+                                                        <SelectItem value="new">New</SelectItem>
+                                                        <SelectItem value="used">Used</SelectItem>
+                                                        <SelectItem value="refurbished">Refurbished</SelectItem>
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage className="text-red-500" />
+                                    </FormItem>
+                                )}
+                            />
+                          
+                        </div>
+
 
                         <FormField
                             control={form.control}
