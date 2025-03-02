@@ -46,7 +46,7 @@ const ManageFavoriteProducts = ({ favoriteProducts }: { favoriteProducts: IFavor
                                     <Image className="md:rounded-l-lg rounded-t-lg md:w-[300px] w-full" src={products?.product?.images[0]} alt={products?.product?.title} width={300} height={200} />
                                     <div className="space-y-3">
                                         <h2 className="md:text-2xl text-xl md:mt-0 mt-4 font-bold text-[#ff8e00]">{products?.product?.title}</h2>
-                                        <div className="flex items-center space-x-2 text-green-600 font-medium">
+                                        <div className={`flex items-center space-x-2 font-medium ${products?.product?.status === 'available' ? "text-green-600" : 'text-red-600'} `}>
                                             <CheckCircle /> <span>{products?.product?.status.charAt(0).toUpperCase() + products?.product?.status.slice(1)}</span>
                                         </div>
                                         <h2 className="md:text-2xl text-xl font-bold text-[#ff8e00]">Price: ৳{products?.product?.price}</h2>

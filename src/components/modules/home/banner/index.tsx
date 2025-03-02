@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Banner = () => {
     return (
-        <div className="border-2 border-[#ff8e00] my-8 rounded-lg p-6 md:flex items-center justify-between gap-8">
+        <div className="border-2 border-[#ff8e00] my-8 rounded-lg p-6 md:flex flex-row-reverse items-center justify-between gap-8">
              <div className="flex-1">
                 <Image className="w-full object-cover rounded-lg" src="https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg?ga=GA1.1.1520422090.1699525632&semt=ais_hybrid" alt="banner_image" width={800} height={400}></Image>
             </div>
@@ -16,7 +16,6 @@ const Banner = () => {
                 <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                     Shop Now
                 </Button>
-
             </div>
         </div>
     );
