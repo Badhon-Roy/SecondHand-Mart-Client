@@ -5,8 +5,8 @@ import { IUser } from "@/types";
 
 
 const AddListing = async () => {
-    const { data } = await getAllUser();
     const {data : categories} = await getAllCategory();
+    const { data } = await getAllUser();
     const user = await getCurrentUser();
     const presentUser = data?.find((person: IUser) => person?.email === user?.email)
     
