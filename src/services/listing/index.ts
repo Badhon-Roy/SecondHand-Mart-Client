@@ -55,8 +55,8 @@ export const updateListing = async (id: string , data: FieldValues) => {
             },
             body: JSON.stringify(data)
         });
-        const result = await res.json();
-        return result;
+        revalidateTag("LISTING")
+        return res.json();
     } catch (error: any) {
         return Error(error);
     }

@@ -30,7 +30,6 @@ export default function Navbar() {
   const handleClose = () => setOpen(false);
   const { user, setIsLoading } = useUser();
 
-
   const handleLogOut = () => {
     logout();
     setIsLoading(true)

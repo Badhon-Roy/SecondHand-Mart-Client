@@ -37,7 +37,6 @@ const LoginForm = () => {
         const toastLoading = toast.loading("Logging...")
         try {
             const res = await loginUser(data)
-            console.log(res);
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
                 reset();

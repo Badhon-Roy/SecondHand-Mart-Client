@@ -1,7 +1,8 @@
 "use server"
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import { revalidateTag } from "next/cache";
 
 
 export const registerUser = async (userData: FieldValues) => {
@@ -72,10 +73,31 @@ export const logout = async () => {
 
 export const getAllUser = async () => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users`,{
+            next: {
+                tags: ["USER"]
+            }
+        })
         const result = await res.json();
         return result;
     } catch (error: any) {
         return Error(error)
     }
 }
+
+export const updateUser = async (id: string , data: FieldValues) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`,{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        revalidateTag("USER")
+        const result = await res.json();
+        return result;
+    } catch (error: any) {
+        return Error(error);
+    }
+};

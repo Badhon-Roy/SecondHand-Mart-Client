@@ -38,19 +38,19 @@ const ManageFavoriteProducts = ({ favoriteProducts }: { favoriteProducts: IFavor
                 </div>
             </div>
             {
-                favoriteProducts?.length > 0 ? <div className="my-8">
+                favoriteProducts?.length > 0 ? <div className="my-8 grid xl:grid-cols-2 gap-8">
                     {
                         favoriteProducts?.map(products => (
-                            <div key={products?._id} className="border-2 p-2 mb-8 rounded-lg shadow-lg">
+                            <div key={products?._id} className="border-2 p-2 rounded-lg shadow-lg">
                                 <div className="md:flex items-center gap-8">
-                                    <Image className="md:rounded-l-lg rounded-t-lg md:w-[300px] w-full" src={products?.product?.images[0]} alt={products?.product?.title} width={300} height={200} />
+                                    <Image className="md:rounded-l-lg md:rounded-t-none rounded-t-lg md:w-[300px] h-[200px] object-cover w-full" src={products?.product?.images[0]} alt={products?.product?.title} width={300} height={200} />
                                     <div className="space-y-3">
                                         <h2 className="md:text-2xl text-xl md:mt-0 mt-4 font-bold text-[#ff8e00]">{products?.product?.title}</h2>
                                         <div className={`flex items-center space-x-2 font-medium ${products?.product?.status === 'available' ? "text-green-600" : 'text-red-600'} `}>
                                             <CheckCircle /> <span>{products?.product?.status.charAt(0).toUpperCase() + products?.product?.status.slice(1)}</span>
                                         </div>
                                         <h2 className="md:text-2xl text-xl font-bold text-[#ff8e00]">Price: ৳{products?.product?.price}</h2>
-                                        <div className="flex justify-between items-center gap-4">
+                                        <div className="flex md:justify-start justify-between items-center gap-4">
                                             <Link href={`/products/${products?.product?._id}`}>
                                                 <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                                                     View Details
