@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SHMTable } from "@/components/ui/core/SHMTable";
 import { deleteListing } from "@/services/listing";
 import { ColumnDef } from "@tanstack/react-table";
-import { Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -39,7 +39,7 @@ const ManageListing = ({ listings }: { listings: any }) => {
                         height={40}
                         className="w-8 h-8 rounded-full border object-cover"
                     />
-                    <span className="truncate">{row.original?.title}</span>
+                    <Link href={`/products/${row?.original?._id}`} className="hover:text-[#ff8e00]"><span className="truncate">{row.original?.title}</span></Link>
                 </div>
             ),
         },
@@ -73,13 +73,23 @@ const ManageListing = ({ listings }: { listings: any }) => {
             accessorKey: "action",
             header: () => <div>Action</div>,
             cell: ({ row }) => (
-                <button
-                    className="text-red-500"
-                    title="Delete"
-                onClick={() => handleDelete(row.original?._id)}
-                >
-                    <Trash className="w-5 h-5" />
-                </button>
+                <>
+                    <Link href={`/user/dashboard/update-listing/${row.original?._id}`}>
+                    <button
+                        className="text-blue-500 cursor-pointer mr-8"
+                        title="Update"
+                    >
+                        <Edit className="w-5 h-5" />
+                    </button>
+                    </Link>
+                    <button
+                        className="text-red-500 cursor-pointer"
+                        title="Delete"
+                        onClick={() => handleDelete(row.original?._id)}
+                    >
+                        <Trash className="w-5 h-5" />
+                    </button>
+                </>
             ),
         },
     ];

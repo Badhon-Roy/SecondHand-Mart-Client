@@ -1,5 +1,6 @@
 "use server"
 
+
 import { revalidateTag } from "next/cache";
 import { FieldValues } from "react-hook-form";
 
@@ -36,6 +37,23 @@ export const getSingleListing = async (id: string) => {
             next: {
                 tags: ["LISTING"]
             }
+        });
+        const result = await res.json();
+        return result;
+    } catch (error: any) {
+        return Error(error);
+    }
+};
+
+
+export const updateListing = async (id: string , data: FieldValues) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}`,{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
         const result = await res.json();
         return result;
