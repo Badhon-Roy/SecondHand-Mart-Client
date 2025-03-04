@@ -6,10 +6,11 @@ import { addFavorite } from "@/services/addToFavorite";
 import { IListing } from "@/types";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { toast } from "sonner";
 
 const ProductDetails = ({ listing }: { listing: IListing }) => {
-    const { _id,title, category, condition, description, images, price, status, userID } = listing;
+    const { _id, title, category, condition, description, images, price, status, userID } = listing;
 
     const { user } = useUser();
 
@@ -101,14 +102,16 @@ const ProductDetails = ({ listing }: { listing: IListing }) => {
                             <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] lg:px-8 px-2 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer flex-1">
                                 Add To Cart
                             </Button>
-                            <Button onClick={()=>handleAddToFavorite(_id)} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] lg:px-8 px-2 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer flex-1">
+                            <Button onClick={() => handleAddToFavorite(_id)} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] lg:px-8 px-2 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer flex-1">
                                 Add To Favorite
                             </Button>
                         </div>
                         <div>
-                            <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer w-full">
-                                Buy Now
-                            </Button>
+                            <Link href={`/order/${_id}`}>
+                                <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer w-full">
+                                    Buy Now
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

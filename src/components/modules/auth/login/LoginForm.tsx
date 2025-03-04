@@ -42,7 +42,7 @@ const LoginForm = () => {
                 reset();
                 router.push('/')
             } else {
-                toast.error("Something went wrong!", { id: toastLoading })
+                toast.error( res?.message || "Something went wrong!", { id: toastLoading })
             }
         } catch (error: any) {
             toast.error(error.message, { id: toastLoading })
