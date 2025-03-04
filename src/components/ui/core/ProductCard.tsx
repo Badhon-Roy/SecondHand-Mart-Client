@@ -87,7 +87,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
                 <div className="flex items-center justify-between my-2">
                     <p className="text-sm text-gray-600">
                         <span className="font-semibold text-lg text-[#ff8e00]">
-                            BDT-{price.toFixed(2)}
+                        Price: ৳{price.toFixed(2)}
                         </span>
                     </p>
                 </div>

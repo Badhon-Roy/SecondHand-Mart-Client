@@ -1,33 +1,36 @@
+"use client";
+
+import { Confetti, type ConfettiRef } from "@/components/magicui/confetti";
+import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+
 const CheckoutSuccessPage = () => {
+    const confettiRef = useRef<ConfettiRef>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        confettiRef.current?.fire({});
+    }, []);
+
     return (
-        <div className="container mx-auto my-8">
-            <div className="bg-white p-10 rounded-lg shadow-lg text-center max-w-lg w-full">
+        <div className="flex flex-col items-center px-4 my-16 relative">
+            {/* Confetti Effect */}
+            <Confetti ref={confettiRef} className="absolute inset-0 z-10 size-full -top-16" />
+
+            {/* Success Card */}
+            <div className="relative bg-white p-10 rounded-lg shadow-2xl text-center max-w-lg w-full animate-fade-in">
                 <div className="flex justify-center mb-6">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-16 w-16 text-green-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 13l4 4L19 7"
-                        />
-                    </svg>
+                    <CheckCircle className="w-20 h-20 text-green-500 animate-bounce" />
                 </div>
-                <h2 className="text-4xl font-semibold text-gray-800 mb-4">Success!</h2>
+                <h2 className="text-4xl font-semibold text-gray-800 mb-4">Payment Successful!</h2>
                 <p className="text-lg text-gray-600 mb-6">
-                    Your order has been successfully processed. Thank you for shopping with us!
+                    Your order has been processed successfully. Thank you for shopping with us! 🎉
                 </p>
-                <a
-                    href="/"
-                    className="inline-block bg-green-500 text-white text-lg px-6 py-3 rounded-md hover:bg-green-600 transition duration-300"
-                >
-                    Go Back to Home
-                </a>
+                <Button onClick={() => router.push('/')} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                    Go Home
+                </Button>
             </div>
         </div>
     );

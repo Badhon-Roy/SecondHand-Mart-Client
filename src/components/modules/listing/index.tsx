@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { SHMTable } from "@/components/ui/core/SHMTable";
 import { deleteListing } from "@/services/listing";
+import { IListing } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Trash } from "lucide-react";
 import Image from "next/image";
@@ -10,7 +11,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 
-const ManageListing = ({ listings }: { listings: any }) => {
+const ManageListing = ({ listings }: { listings: IListing[] }) => {
 
     const handleDelete = async (id: string) => {
         try {
@@ -26,7 +27,7 @@ const ManageListing = ({ listings }: { listings: any }) => {
         }
     };
 
-    const columns: ColumnDef<any>[] = [
+    const columns: ColumnDef<IListing>[] = [
         {
             accessorKey: "title",
             header: () => <div>Listing</div>,
@@ -48,7 +49,7 @@ const ManageListing = ({ listings }: { listings: any }) => {
             header: () => <div>Price</div>,
             cell: ({ row }) => (
                 <div>
-                    <p>BDT-{row.original.price}</p>
+                    <p>৳{row.original.price}</p>
                 </div>
             ),
         },
