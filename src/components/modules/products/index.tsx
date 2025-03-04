@@ -1,18 +1,23 @@
 "use client"
 
-import { IListing } from "@/types";
+import { ICategory, IListing } from "@/types";
 import styles from "./products.module.css"
 import FilterSidebar from "./filterSidebar";
 import ProductCard from "@/components/ui/core/ProductCard";
 import { useSearchParams } from "next/navigation";
 
-const ManageProducts = ({ products }: { products: IListing[] }) => {
+interface IManageProductsProps {
+    products: IListing[],
+    categories: ICategory[]
+}
+
+const ManageProducts = ({ products, categories }: IManageProductsProps) => {
     const searchParams = useSearchParams()
     const search = searchParams.get('category')
     const filterByCategoryProducts = products?.filter(product => product?.category?.name === search)
 
     return (
-        <div className="container mx-auto my-8">
+        <div >
             <div className="w-full rounded-lg border-2 p-2 border-[#ff8e00]">
                 <div className={`${styles.banner}  text-center flex justify-center items-center rounded-lg`} >
                     <div>
@@ -27,7 +32,7 @@ const ManageProducts = ({ products }: { products: IListing[] }) => {
             </div>
             <div className="md:flex my-8 gap-8">
                 <div>
-                    <FilterSidebar />
+                    <FilterSidebar categories={categories} />
                 </div>
                 {
                     search && filterByCategoryProducts?.length > 0 ?
@@ -35,15 +40,18 @@ const ManageProducts = ({ products }: { products: IListing[] }) => {
                             {filterByCategoryProducts?.map((product: IListing, idx: number) => (
                                 <ProductCard key={idx} product={product} />
                             ))}
-                        </div> : <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
-                            {products?.map((product: IListing, idx: number) => (
-                                <ProductCard key={idx} product={product} />
-                            ))}
+                        </div> : <div>
+                            {
+                                products?.length > 0 ? <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
+                                {products?.map((product: IListing, idx: number) => (
+                                    <ProductCard key={idx} product={product} />
+                                ))}
+                            </div> : <p className="text-3xl font-bold my-8 text-center ">No product found</p>
+                            }
                         </div>
                 }
             </div>
         </div>
-
     );
 };
 

@@ -40,7 +40,7 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
                         height={40}
                         className="w-8 h-8 rounded-full border object-cover"
                     />
-                    <Link href={`/products/${row?.original?._id}`} className="hover:text-[#ff8e00]"><span className="truncate">{row.original?.title}</span></Link>
+                    <Link href={`/products/${row?.original?._id}`} className="hover:text-[#ff8e00] mr-8"><span className="truncate">{row?.original?.title.length > 20 ? row?.original?.title.slice(0, 20) + "..." : row?.original?.title}</span></Link>
                 </div>
             ),
         },

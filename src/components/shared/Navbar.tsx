@@ -120,6 +120,40 @@ export default function Navbar() {
                     {label}
                   </Link>
                 ))}
+
+
+                {
+                  user && user?.email ? <div>
+                    <Link
+                      key={'favorite'}
+                      href={'/favorite'}
+                      className={`block px-4 py-2 text-lg rounded-md transition-colors ${pathname === '/favorite' ? 'bg-white text-black' : 'hover:bg-white/20'}`}
+                      onClick={handleClose}
+                    >
+                      Favorite
+                    </Link>
+                    <Link
+                      key={'dashboard'}
+                      href={'/user/dashboard'}
+                      className={`block px-4 py-2 text-lg rounded-md transition-colors ${pathname === '/favorite' ? 'bg-white text-black' : 'hover:bg-white/20'}`}
+                      onClick={handleClose}
+                    >
+                      Dashboard
+                    </Link>
+                    <Button onClick={handleLogOut} className="border-2 border-white bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 w-full rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                      <LogOut /> Log out
+                    </Button>
+                  </div> : <Link
+                    key={'/login'}
+                    href={'/login'}
+                    className={`px-4 py-2 rounded-md transition-colors ${pathname === '/login' ? 'text-[#ff8e00] font-bold text-xl' : 'font-medium text-xl'}`}
+                  >
+                    Login
+                  </Link>
+                }
+
+
+
               </div>
             </SheetContent>
           </Sheet>

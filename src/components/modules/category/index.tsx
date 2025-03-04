@@ -18,7 +18,7 @@ const ManageCategory = ({categories}: {categories : ICategory[]}) => {
             </div>
         </div>
         <div className="md:flex my-8 gap-8">
-            <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-8 md:mt-0 mt-8">
+            <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 lg:gap-8 md:gap-6 gap-4 md:mt-0 mt-8">
                 {categories?.map((category: ICategory, idx: number) => (
                     <CategoryCard key={idx} category={category} />
                 ))}

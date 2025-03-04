@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import {
-    BadgeDollarSign,
+  BadgeDollarSign,
   Bot,
   Frame,
   House,
@@ -29,6 +29,7 @@ import {
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import Link from "next/link";
+import Image from "next/image";
 
 const data = {
   navMain: [
@@ -102,12 +103,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/">
-                <div className="flex items-center justify-center">
-                  LOGO
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <h2 className="font-bold text-xl">NextMart</h2>
+              <Link href="/" className="flex items-center space-x-2">
+                <Image src='https://ecommerceni.co.uk/wp-content/uploads/sites/4/2022/11/ECNI-logo-3-removebg-preview.png' alt='logo' width={50} height={50} className='object-cover rounded-full' />
+                <div className="flex flex-col leading-tight">
+                  <h2 className="text-xl font-bold tracking-wide">SecondHand</h2>
+                  <p className="text-sm font-medium text-gray-700">Mart</p>
                 </div>
               </Link>
             </SidebarMenuButton>
