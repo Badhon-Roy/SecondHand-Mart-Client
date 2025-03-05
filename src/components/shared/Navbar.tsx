@@ -1,16 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { Heart, LayoutDashboard, LogOut, Menu, User, X } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Heart, LayoutDashboard, LogOut, Menu, Search, User, X } from 'lucide-react';
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import Image from 'next/image';
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products' },
-  { href: '/categories', label: 'Categories' },
-];
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,10 +17,64 @@ import {
 import { Button } from '../ui/button';
 import { logout } from '@/services/AuthService';
 import { useUser } from '@/context/UserContext';
+import { Input } from '../ui/input';
+import { getAllListing } from '@/services/listing';
+import { IListing } from '@/types';
+
+
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/products', label: 'Products' },
+  { href: '/categories', label: 'Categories' },
+];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const router = useRouter(); // Initialize router
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await getAllListing();
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Filter products based on query
+  useEffect(() => {
+    if (query) {
+      const filtered = data.filter((product: IListing) =>
+        product?.title?.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData([]);
+    }
+  }, [query, data]);
+
+  // Handle navigation & clear search
+  const handleSelectProduct = (productId: string) => {
+    router.push(`/products/${productId}`);
+    setQuery("");
+    setFilteredData([]);
+  };
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+  };
+
+
+
 
   const handleClose = () => setOpen(false);
   const { user, setIsLoading } = useUser();
@@ -45,6 +94,52 @@ export default function Navbar() {
             <p className="text-sm font-medium text-gray-700">Mart</p>
           </div>
         </Link>
+
+
+        <div className="relative md:block hidden">
+          {/* Search Input */}
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center bg-white shadow-lg border-2 border-[#ff8e00] rounded overflow-hidden"
+          >
+            <div className="px-4 text-[#ff8e00]">
+              <Search className="text-xl" />
+            </div>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for products..."
+              className="flex-1 py-3 px-2 text-lg focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-6 py-3 text-white font-semibold text-lg transition-all hover:from-[#e9a912] hover:to-[#ff6f00]"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* Auto-Suggestions Dropdown */}
+          {filteredData.length > 0 && (
+            <ul className="absolute w-full bg-white border border-gray-300 mt-2 rounded-md shadow-lg max-h-48 overflow-y-auto">
+              {filteredData.map((product: IListing) => (
+                <li
+                  key={product._id}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleSelectProduct(product._id)} // Navigate & clear input
+                >
+                  {product.title}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+
+
+
+
 
         {/* Desktop Navbar */}
         <div className="hidden lg:flex space-x-4">
@@ -110,6 +205,44 @@ export default function Navbar() {
                 <X className="w-6 h-6" />
               </button>
               <div className="flex flex-col space-y-4 mt-8">
+
+                <div className="relative">
+                  {/* Search Input */}
+                  <form
+                    onSubmit={handleSearch}
+                    className="flex items-center bg-white shadow-lg border-2 border-[#ff8e00] rounded overflow-hidden"
+                  >
+                    <div className="px-2 text-[#ff8e00]">
+                      <Search className="text-xl" />
+                    </div>
+                    <input
+                      type="text"
+                      value={query}
+                      onChange={(e) => {setQuery(e.target.value)}}
+                      placeholder="Search for products..."
+                      className="md:flex-1 py-2 px-1 focus:outline-none w-full"
+                    />
+                  </form>
+
+                  {/* Auto-Suggestions Dropdown */}
+                  {filteredData?.length > 0 && (
+                    <ul className="absolute w-full bg-white border border-gray-300 mt-2 rounded-md shadow-lg max-h-48 overflow-y-auto">
+                      {filteredData?.map((product: IListing) => (
+                        <li
+                          key={product?._id}
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => {
+                            handleClose();
+                            handleSelectProduct(product?._id);
+                          }}
+                        >
+                          {product?.title}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
                 {navLinks.map(({ href, label }) => (
                   <Link
                     key={href}
