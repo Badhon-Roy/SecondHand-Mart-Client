@@ -8,7 +8,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginUser, reCaptchaValidation, registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { loginValidationSchema } from "./loginValidation";
 import Link from "next/link";
 import { useState } from "react";
@@ -20,6 +20,8 @@ const LoginForm = () => {
     const [reCaptchaStatue, setReCaptchaStatue] = useState(false)
 
     const { formState: { isSubmitting }, reset } = form;
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get('redirectPath')
     const router = useRouter();
 
     const handleReCaptcha = async (value: string | null) => {
@@ -39,10 +41,14 @@ const LoginForm = () => {
             const res = await loginUser(data)
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
+                if (redirect) {
+                    router.push(redirect)
+                } else {
+                    router.push('/')
+                }
                 reset();
-                router.push('/')
             } else {
-                toast.error( res?.message || "Something went wrong!", { id: toastLoading })
+                toast.error(res?.message || "Something went wrong!", { id: toastLoading })
             }
         } catch (error: any) {
             toast.error(error.message, { id: toastLoading })

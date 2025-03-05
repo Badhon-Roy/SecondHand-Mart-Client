@@ -20,6 +20,7 @@ import { useUser } from '@/context/UserContext';
 import { Input } from '../ui/input';
 import { getAllListing } from '@/services/listing';
 import { IListing } from '@/types';
+import { protectedRotes } from '@/constants';
 
 
 
@@ -30,12 +31,15 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { user, setIsLoading } = useUser();
+
+  
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,15 +77,14 @@ export default function Navbar() {
     e.preventDefault();
   };
 
-
-
-
   const handleClose = () => setOpen(false);
-  const { user, setIsLoading } = useUser();
 
   const handleLogOut = () => {
     logout();
     setIsLoading(true)
+    if(protectedRotes?.some(route => pathname.match(route))){
+      router.push('/')
+    }
   }
 
   return (
@@ -102,7 +105,7 @@ export default function Navbar() {
             onSubmit={handleSearch}
             className="flex items-center bg-white shadow-lg border-2 border-[#ff8e00] rounded overflow-hidden"
           >
-            <div className="px-4 text-[#ff8e00]">
+            <div className="xl:px-4 px-2 text-[#ff8e00]">
               <Search className="text-xl" />
             </div>
             <input
@@ -110,11 +113,11 @@ export default function Navbar() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search for products..."
-              className="flex-1 py-3 px-2 text-lg focus:outline-none"
+              className="flex-1 py-3 px-2 text-lg focus:outline-none xl:w-full lg:w-[120px] "
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-6 py-3 text-white font-semibold text-lg transition-all hover:from-[#e9a912] hover:to-[#ff6f00]"
+              className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] xl:px-6 px-3 py-3 text-white font-semibold text-lg transition-all hover:from-[#e9a912] hover:to-[#ff6f00]"
             >
               Search
             </button>
@@ -169,7 +172,7 @@ export default function Navbar() {
                         <Heart />  Favorite
                       </div>
                     </Link>
-                    <Link href={'/user/dashboard'}>
+                    <Link href={`/${user?.role}/dashboard`}>
                       <div className='hover:bg-[#ff8e00] w-full px-4 py-2 rounded-[4px] hover:font-bold hover:text-white flex items-center gap-2'>
                         <LayoutDashboard /> Dashboard
                       </div>

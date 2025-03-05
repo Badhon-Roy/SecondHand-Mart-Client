@@ -14,11 +14,13 @@ import { IListing, IUser } from "@/types";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: IListing }) => {
     const { _id, title, price, images, status } = product;
     const { user } = useUser();
+    const router = useRouter();
 
 
     const handleAddToFavorite = async (id: string) => {
@@ -35,6 +37,9 @@ const ProductCard = ({ product }: { product: IListing }) => {
                 } else {
                     toast.error(res.message, { id: toastLoading })
                 }
+            }else{
+                toast.error('Firstly login now!', { id: toastLoading })
+                router.push('/login')
             }
         } catch (error: any) {
             toast.error(error.message, { id: toastLoading })

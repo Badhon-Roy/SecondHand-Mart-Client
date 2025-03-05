@@ -9,7 +9,6 @@ interface IUserProviderValues {
     setUser: Dispatch<SetStateAction<IUser | null>>;
     setIsLoading: Dispatch<SetStateAction<boolean>>
 }
-
 const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {

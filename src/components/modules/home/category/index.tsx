@@ -23,7 +23,7 @@ const Category = async ({ categories }: { categories: ICategory[] }) => {
                     All Category
                 </Button></Link>
             </div>
-            <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 my-8">
+            <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-6 gap-4 my-8">
                 {
                     categories?.slice(0,10)?.map((category: ICategory) => (
                         <CategoryCard key={category?._id} category={category} />
