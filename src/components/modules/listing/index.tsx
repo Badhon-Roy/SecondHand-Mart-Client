@@ -21,9 +21,8 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
             } else if (res?.error) {
                 toast.error(res?.message || "Something went wrong")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Something went wrong")
+        } catch (error : any) {
+            toast.error( error?.message ||"Something went wrong")
         }
     };
 

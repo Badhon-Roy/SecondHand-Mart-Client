@@ -20,11 +20,9 @@ const RegisterForm = () => {
     const router = useRouter();
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data);
         const toastLoading = toast.loading("Registering...")
         try {
             const res = await registerUser(data)
-            console.log(res);
             if (res.success) {
                 toast.success("Register Successful", { id: toastLoading })
                 reset();

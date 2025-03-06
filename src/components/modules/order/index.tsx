@@ -12,11 +12,11 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 interface IManageOrderProps {
-    product : IListing,
-    buyerID : string
+    product: IListing,
+    buyerID: string
 }
 
-const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
+const ManageOrder = ({ product, buyerID }: IManageOrderProps) => {
     const { _id, images, title, status, price, category, condition, userID, createdAt } = product;
 
     const form = useForm({
@@ -52,8 +52,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
             });
 
             const result = await res.json();
-            console.log(result);
-            if(!res?.ok){
+            if (!res?.ok) {
                 toast.error(result?.error)
                 throw new Error(result?.error)
             }
@@ -67,7 +66,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
     };
 
     return (
-        <div className="my-8 flex justify-between gap-8">
+        <div className="my-8 lg:flex justify-between gap-8">
             <div>
                 {/* Product Information */}
                 <div className="border-2 p-2 rounded-lg shadow-lg flex-1">
@@ -99,7 +98,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                     </div>
                 </div>
                 {/* Seller Information */}
-                <div className="bg-white p-6 rounded-lg shadow-lg mt-8">
+                <div className="bg-white md:p-6 p-3 rounded-lg shadow-lg mt-8">
                     <h2 className="text-2xl font-semibold text-[#ff8e00] mb-4 underline">Seller Info</h2>
                     <div className="space-y-3">
                         <div className="flex items-center">
@@ -108,7 +107,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                         </div>
                         <div className="flex items-center">
                             <span className="font-medium text-gray-700 w-28">Email:</span>
-                            <span className="text-gray-600">{userID?.email}</span>
+                            <span className="text-gray-600 md:text-[16px] text-[12px]">{userID?.email}</span>
                         </div>
                         <div className="flex items-center">
                             <span className="font-medium text-gray-700 w-28">Phone:</span>
@@ -122,8 +121,8 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                 </div>
             </div>
             {/* Order Form */}
-            <div className="border-2 p-6 rounded-lg shadow-lg flex-1">
-                <h2 className="text-3xl font-semibold text-center text-[#ff6f00] mb-4">Provide Your Information</h2>
+            <div className="border-2 md:p-6 p-3 rounded-lg shadow-lg flex-1 lg:mt-0 mt-8">
+                <h2 className="md:text-3xl text-xl font-semibold text-center text-[#ff6f00] mb-4">Provide Your Information</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         {/* Form Fields */}
@@ -133,7 +132,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                             rules={{ required: "Name is required" }}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-medium">Name</FormLabel>
+                                    <FormLabel className="md:text-lg font-medium">Name</FormLabel>
                                     <FormControl>
                                         <Input
                                             className="w-full py-5 px-4 rounded-[4px] shadow-md"
@@ -145,14 +144,14 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                                 </FormItem>
                             )}
                         />
-                        <div className="flex justify-between gap-8">
+                        <div className="md:flex justify-between gap-8">
                             <FormField
                                 control={form.control}
                                 name="phoneNumber"
                                 rules={{ required: "Phone Number is required" }}
                                 render={({ field }) => (
                                     <FormItem className="flex-1">
-                                        <FormLabel className="text-lg font-medium">Phone Number</FormLabel>
+                                        <FormLabel className="md:text-lg font-medium">Phone Number</FormLabel>
                                         <FormControl>
                                             <Input
                                                 className="w-full py-5 px-4 rounded-[4px] shadow-md"
@@ -168,8 +167,8 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                                 control={form.control}
                                 name="streetNameAndHouseNo"
                                 render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel className="text-lg font-medium">Street Name and House Number</FormLabel>
+                                    <FormItem className="flex-1 md:mt-0 mt-4">
+                                        <FormLabel className="md:text-lg font-medium">Street Name and House Number</FormLabel>
                                         <FormControl>
                                             <Input
                                                 className="w-full py-5 px-4 rounded-[4px] shadow-md"
@@ -182,14 +181,14 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                                 )}
                             />
                         </div>
-                        <div className="flex justify-between gap-8">
+                        <div className="md:flex justify-between gap-8">
                             <FormField
                                 control={form.control}
                                 name="city"
                                 rules={{ required: "City is required" }}
                                 render={({ field }) => (
                                     <FormItem className="flex-1">
-                                        <FormLabel className="text-lg font-medium">City</FormLabel>
+                                        <FormLabel className="md:text-lg font-medium">City</FormLabel>
                                         <FormControl>
                                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                 <SelectTrigger>
@@ -210,8 +209,8 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                                 control={form.control}
                                 name="region"
                                 render={({ field }) => (
-                                    <FormItem className="flex-1">
-                                        <FormLabel className="text-lg font-medium">Region</FormLabel>
+                                    <FormItem className="flex-1 md:mt-0 mt-4">
+                                        <FormLabel className="md:text-lg font-medium">Region</FormLabel>
                                         <FormControl>
                                             <Input
                                                 className="w-full py-5 px-4 rounded-[4px] shadow-md"
@@ -229,7 +228,7 @@ const ManageOrder = ({ product ,buyerID }: IManageOrderProps) => {
                             name="postalCode"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-lg font-medium">Postal Code</FormLabel>
+                                    <FormLabel className="md:text-lg font-medium">Postal Code</FormLabel>
                                     <FormControl>
                                         <Input
                                             className="w-full py-5 px-4 rounded-[4px] shadow-md"

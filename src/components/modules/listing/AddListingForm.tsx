@@ -30,7 +30,6 @@ const AddListingForm = ({ userId, categories }: IAddListingFormProps) => {
             images: [data?.images1, data?.images2],
             userID: userId,
         }
-        console.log(modifiedData);
         const toastLoading = toast.loading("Adding...")
         try {
             const res = await addListing(modifiedData)

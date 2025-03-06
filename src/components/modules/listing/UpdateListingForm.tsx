@@ -40,11 +40,9 @@ const UpdateListingForm = ({listing ,categories }: IUpdateListingFormProps) => {
             images: [data?.images1, data?.images2],
             userID: listing?.userID?._id,
         }
-        console.log(modifiedData);
         const toastLoading = toast.loading("Updating...")
         try {
             const res = await updateListing(listing?._id , modifiedData)
-            console.log(res);
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
                 router.push('/user/dashboard/listing')

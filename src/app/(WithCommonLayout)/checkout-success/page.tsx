@@ -1,10 +1,10 @@
 "use client";
 
-import { Confetti, type ConfettiRef } from "@/components/magicui/confetti";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { Confetti, ConfettiRef } from "@/components/magicui/confetti";
 
 const CheckoutSuccessPage = () => {
     const confettiRef = useRef<ConfettiRef>(null);

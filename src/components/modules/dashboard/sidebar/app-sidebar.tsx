@@ -55,6 +55,11 @@ const data = {
       icon: BadgeDollarSign,
     },
     {
+      title: "Message",
+      url: "/user/dashboard/message",
+      icon: BadgeDollarSign,
+    },
+    {
       title: "Profile",
       url: "/user/dashboard/profile",
       icon: User,

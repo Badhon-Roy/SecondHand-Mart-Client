@@ -1,12 +1,14 @@
 
 "use client"
+
+
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginUser, reCaptchaValidation, registerUser } from "@/services/AuthService";
+import { loginUser, reCaptchaValidation } from "@/services/AuthService";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginValidationSchema } from "./loginValidation";

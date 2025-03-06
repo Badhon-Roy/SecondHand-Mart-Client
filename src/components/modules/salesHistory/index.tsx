@@ -13,7 +13,6 @@ import { toast } from "sonner";
 const MangeSalesHistory = ({ orders }: { orders: ISalesHistory[] }) => {
 
     const handleStatusUpdate = async (id: string, sellerID: string) => {
-        console.log(sellerID);
         const modifiedData = {
             orderID: id,
             sellerID: sellerID,

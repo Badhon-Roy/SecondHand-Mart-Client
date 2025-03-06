@@ -39,7 +39,6 @@ const ManageProfile = ({ user }: { user: IUser }) => {
         const toastLoading = toast.loading("Editing...")
         try {
             const res = await updateUser(_id, data)
-            console.log(res);
             if (res.success) {
                 toast.success(res.message, { id: toastLoading })
                 reset();
@@ -55,7 +54,6 @@ const ManageProfile = ({ user }: { user: IUser }) => {
         const toastLoading = toast.loading("Deleting...")
         try {
             const res = await deleteUser(_id)
-            console.log(res);
             if (res.success) {
                 toast.success(res.message, { id: toastLoading })
                 await logout();

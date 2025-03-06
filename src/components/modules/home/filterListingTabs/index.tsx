@@ -19,11 +19,9 @@ import {
 import { IListing } from "@/types";
 
 const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
-    console.log(listings);
     const newProducts = listings?.filter(listing => listing?.condition === 'new')
     const usedProducts = listings?.filter(listing => listing?.condition === 'used')
     const refurbishedProducts = listings?.filter(listing => listing?.condition === 'refurbished')
-    console.log(newProducts);
     return (
         <div>
             <div className="text-center mt-24">
