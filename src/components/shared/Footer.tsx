@@ -1,5 +1,7 @@
 "use client"
+import Image from "next/image";
 import Link from "next/link";
+import logoImage from "../../app/assets/logo.png"
 
 const Footer = () => {
   return (
@@ -7,7 +9,13 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/3 mb-6">
-            <h3 className="text-xl font-semibold mb-3">SecondHand Mart</h3>
+            <div className="flex gap-2">
+              <Image src={logoImage} alt='logo' width={40} height={40} className='object-cover rounded-full' />
+              <div >
+                <h3 className="text-xl font-semibold">SecondHand</h3>
+                <p>Mart</p>
+              </div>
+            </div>
             <p>Connecting buyers and sellers with ease.</p>
           </div>
 

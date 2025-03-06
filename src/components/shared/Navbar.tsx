@@ -17,10 +17,10 @@ import {
 import { Button } from '../ui/button';
 import { logout } from '@/services/AuthService';
 import { useUser } from '@/context/UserContext';
-import { Input } from '../ui/input';
 import { getAllListing } from '@/services/listing';
 import { IListing } from '@/types';
 import { protectedRotes } from '@/constants';
+import logoImage from "../../app/assets/logo.png"
 
 
 
@@ -32,8 +32,7 @@ const navLinks = [
 
 export default function Navbar() {
   const { user, setIsLoading } = useUser();
-
-  
+  console.log(user);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [query, setQuery] = useState("");
@@ -90,8 +89,8 @@ export default function Navbar() {
   return (
     <nav className="text-black shadow-md p-4 sticky top-0 z-[30] bg-white">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <Image src='https://ecommerceni.co.uk/wp-content/uploads/sites/4/2022/11/ECNI-logo-3-removebg-preview.png' alt='logo' width={50} height={50} className='object-cover rounded-full' />
+        <Link href="/" className="flex items-center space-x-2 ">
+          <Image src={logoImage} alt='logo' width={30} height={40} className='object-cover rounded-full' />
           <div className="flex flex-col leading-tight">
             <h2 className="text-xl font-bold tracking-wide">SecondHand</h2>
             <p className="text-sm font-medium text-gray-700">Mart</p>

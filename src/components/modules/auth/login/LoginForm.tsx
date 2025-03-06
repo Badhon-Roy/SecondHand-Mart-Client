@@ -1,7 +1,6 @@
 
 "use client"
 
-
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -45,8 +44,10 @@ const LoginForm = () => {
                 toast.success(res?.message, { id: toastLoading })
                 if (redirect) {
                     router.push(redirect)
+                    window.location.reload();
                 } else {
                     router.push('/')
+                    window.location.reload();
                 }
                 reset();
             } else {
