@@ -33,7 +33,6 @@ const navLinks = [
 
 export default function Navbar() {
   const { user, setIsLoading } = useUser();
-  console.log(user);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [query, setQuery] = useState("");

@@ -10,9 +10,7 @@ const UserDashboard = async () => {
   const { data } = await getAllUser();
   const user = await getCurrentUser();
   const presentUser = data?.find((person: IUser) => person?.email === user?.email);
-
-  const { data: products } = await getAllListing();
-  const filterListings = products?.filter((product : IListing) => product?.userID?.email === user?.email)
+  const { data: products } = await getAllListing(user?.userId);
   const { data: favorites } = await getAllFavorite(presentUser?.email);
   const { data: purchasesHistory } = await getPurchasesHistory(presentUser?._id);
   const { data: salesHistory } = await getSalesHistory(presentUser?._id);
@@ -29,9 +27,9 @@ const UserDashboard = async () => {
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="bg-gradient-to-r from-pink-400 to-pink-600 text-white shadow-lg rounded-lg p-4">
           <div className="text-center">
-            <h2 className="text-white md:text-4xl text-2xl font-bold text-center">{filterListings?.length}</h2>
+            <h2 className="text-white md:text-4xl text-2xl font-bold text-center">{products?.length}</h2>
             <CardTitle className="text-xl font-semibold">All Listings</CardTitle>
-            <h2 className="text-gray-100">You have {filterListings?.length} products listed</h2>
+            <h2 className="text-gray-100">You have {products?.length} products listed</h2>
           </div>
         </Card>
         <Card className="bg-gradient-to-r from-teal-400 to-teal-600 text-white shadow-lg rounded-lg p-4">

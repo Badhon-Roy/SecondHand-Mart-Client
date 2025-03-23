@@ -1,12 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-} from "@/components/ui/card";
 import { useUser } from "@/context/UserContext";
 import { addFavorite } from "@/services/addToFavorite";
 import { IListing, IUser } from "@/types";
@@ -18,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: IListing }) => {
-    const { _id, title, price, images, status,discountPrice } = product;
+    const { _id, title, price, images, status, discountPrice } = product;
     const { user } = useUser();
     const router = useRouter();
 
@@ -47,10 +41,10 @@ const ProductCard = ({ product }: { product: IListing }) => {
     }
 
     return (
-        <Card className="p-3 bg-white shadow-lg rounded-lg h-[420px] transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full">
-            <CardHeader className="relative p-0 h-56 overflow-hidden">
+        <div className="p-3 bg-white shadow-lg rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full">
+            <div className="relative p-0 h-[200px] overflow-hidden">
                 <Image
-                    className="rounded-t-lg h-56 w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105 hover:rounded-lg"
+                    className="rounded-t-lg h-[200px] w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105 hover:rounded-lg"
                     src={
                         images[0] ||
                         "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
@@ -78,8 +72,8 @@ const ProductCard = ({ product }: { product: IListing }) => {
                     <button onClick={() => handleAddToFavorite(_id)} title="Add To Favorite" className="cursor-pointer rounded-tr-lg rounded-bl-lg w-8 h-8 border bg-white flex justify-center items-center text-[#ff8e00]"><Heart /></button>
                 </div>
 
-            </CardHeader>
-            <CardContent className="p-0 mt-3">
+            </div>
+            <div className="p-0 mt-3">
                 <Link href={`/products/${_id}`} passHref>
                     <h2
                         title={title}
@@ -99,21 +93,21 @@ const ProductCard = ({ product }: { product: IListing }) => {
                         </div>
                     }
                 </div>
-            </CardContent>
+            </div>
 
-            <CardFooter className="block p-0 mt-2">
+            <div className="block p-0 mt-2">
                 <div className="flex gap-2 items-center justify-end">
                     {
-                        status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
+                        status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-5 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
                             Sold Out
                         </Button> : <Link href={`/order/${_id}`}>
-                            <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
+                            <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-5 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
                                 Buy Now
                             </Button></Link>
                     }
                 </div>
-            </CardFooter>
-        </Card>
+            </div>
+        </div>
     );
 };
 

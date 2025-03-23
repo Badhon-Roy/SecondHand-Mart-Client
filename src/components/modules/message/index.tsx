@@ -23,7 +23,6 @@ const ManageMessage = ({ messages, senderID }: { messages: IMessage[], senderID:
     const { reset } = form;
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data);
         const toastLoading = toast.loading("Sending...")
         const modifiedData = {
             message: data?.message,
@@ -33,7 +32,6 @@ const ManageMessage = ({ messages, senderID }: { messages: IMessage[], senderID:
 
         try {
             const res = await sendMessage(modifiedData)
-            console.log(res);
             if (res.success) {
                 toast.success(res.message, { id: toastLoading })
                 reset();

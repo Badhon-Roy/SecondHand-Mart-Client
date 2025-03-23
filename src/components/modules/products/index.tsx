@@ -1,17 +1,19 @@
 "use client"
 
-import { ICategory, IListing } from "@/types";
+import { ICategory, IListing, IMeta } from "@/types";
 import styles from "./products.module.css"
 import FilterSidebar from "./filterSidebar";
 import ProductCard from "@/components/ui/core/ProductCard";
 import { useSearchParams } from "next/navigation";
+import TablePagination from "@/components/ui/core/SHMTable/TablePagination";
 
 interface IManageProductsProps {
     products: IListing[],
-    categories: ICategory[]
+    categories: ICategory[],
+    meta: IMeta
 }
 
-const ManageProducts = ({ products, categories }: IManageProductsProps) => {
+const ManageProducts = ({ products, categories, meta }: IManageProductsProps) => {
     const searchParams = useSearchParams()
     const search = searchParams.get('category')
     const filterByCategoryProducts = products?.filter(product => product?.category?.name === search)
@@ -36,21 +38,22 @@ const ManageProducts = ({ products, categories }: IManageProductsProps) => {
                 </div>
                 {
                     search && filterByCategoryProducts?.length > 0 ?
-                        <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
+                        <div className="grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
                             {filterByCategoryProducts?.map((product: IListing, idx: number) => (
                                 <ProductCard key={idx} product={product} />
                             ))}
                         </div> : <div>
                             {
-                                products?.length > 0 ? <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
-                                {products?.map((product: IListing, idx: number) => (
-                                    <ProductCard key={idx} product={product} />
-                                ))}
-                            </div> : <p className="text-3xl font-bold my-8 text-center ">No product found</p>
+                                products?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-6 md:mt-0 mt-8">
+                                    {products?.map((product: IListing, idx: number) => (
+                                        <ProductCard key={idx} product={product} />
+                                    ))}
+                                </div> : <p className="text-3xl font-bold my-8 text-center ">No product found</p>
                             }
                         </div>
                 }
             </div>
+            <TablePagination totalPage={meta?.totalPage} />
         </div>
     );
 };

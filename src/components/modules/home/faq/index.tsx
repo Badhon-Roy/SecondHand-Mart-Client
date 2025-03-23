@@ -9,10 +9,10 @@ const FaqSection = () => {
     return (
         <section className="flex flex-col items-center justify-center py-20 md:px-6 px-4">
             <div>
-                <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
+                <h2 className="lg:text-[56px] md:text-[40px] text-[30px] text-center font-extrabold text-[#ff8e00]">
                     Frequently Asked Questions
                 </h2>
-                <Accordion type="single" collapsible className="md:space-y-4 space-y-2 max-w-4xl mx-auto mt-8">
+                <Accordion type="single" collapsible className="md:space-y-4 md:w-3/4 mx-auto space-y-2 mt-8 grid lg:grid-cols-2 gap-4">
                     {faqData.map((faq, index) => (
                         <AccordionItem
                             key={index}
@@ -60,6 +60,10 @@ const faqData = [
         answer:
             "If you suspect fraud, report the seller via our platform’s 'Report' button or contact customer support for assistance.",
     },
+    {
+        question: "Can I edit or delete my listing after posting?",
+        answer: "Yes, you can edit or delete your listing anytime from your account dashboard under the 'My Listings' section."
+    }
 ];
 
 export default FaqSection;

@@ -32,7 +32,6 @@ const UpdateBlogForm = ({ blog }: { blog: IBlog }) => {
         const toastLoading = toast.loading("Updating...")
         try {
             const res = await updateBlog(blog?._id, modifiedData)
-            console.log(res);
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
                 router.push('/user/dashboard/blogs')

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { SHMTable } from "@/components/ui/core/SHMTable";
 import { addDiscount, deleteListing } from "@/services/listing";
-import { IListing } from "@/types";
+import { IListing, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, PlusSquare, Trash } from "lucide-react";
 import Image from "next/image";
@@ -11,20 +11,18 @@ import Link from "next/link";
 import { toast } from "sonner";
 import {
     Dialog,
-    DialogClose,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import TablePagination from "@/components/ui/core/SHMTable/TablePagination";
 
 
-const ManageListing = ({ listings }: { listings: IListing[] }) => {
+const ManageListing = ({ listings , meta}: { listings: IListing[] , meta: IMeta}) => {
     const [discountId, setDiscountId] = useState<string | null>(null);
     const form = useForm();
     const { formState: { isSubmitting }, reset } = form;
@@ -34,7 +32,6 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
         const discount = parseInt(data?.discount);
         try {
             const res = await addDiscount(discountId as string, discount);
-            console.log(res);
             if (res.success) {
                 toast.success(res.message, { id: toastLoading });
                 reset();
@@ -69,12 +66,12 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
                 <div className="flex items-center space-x-3">
                     <Image
                         src={row.original?.images[0]}
-                        alt={row.original.title}
+                        alt={row.original?.title}
                         width={40}
                         height={40}
                         className="w-8 h-8 rounded-full border object-cover"
                     />
-                    <Link href={`/products/${row?.original?._id}`} className="hover:text-[#ff8e00] mr-8"><span className="truncate">{row?.original?.title.length > 20 ? row?.original?.title.slice(0, 20) + "..." : row?.original?.title}</span></Link>
+                    <Link href={`/products/${row?.original?._id}`} className="hover:text-[#ff8e00] mr-8"><span className="truncate">{row?.original?.title?.length > 20 ? row?.original?.title.slice(0, 20) + "..." : row?.original?.title}</span></Link>
                 </div>
             ),
         },
@@ -207,6 +204,7 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
             <div className="mt-4">
                 <SHMTable data={listings} columns={columns} />
             </div>
+            <TablePagination totalPage={meta?.totalPage}/>
         </div>
     );
 };

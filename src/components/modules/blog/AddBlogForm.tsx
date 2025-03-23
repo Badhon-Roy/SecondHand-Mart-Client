@@ -22,11 +22,9 @@ const AddBlogForm = ({ userId }: { userId: string }) => {
             ...data,
             user: userId,
         }
-        console.log(modifiedData);
         const toastLoading = toast.loading("Adding...")
         try {
             const res = await addBlog(modifiedData)
-            console.log(res);
             if (res.success) {
                 toast.success(res?.message, { id: toastLoading })
                 reset();

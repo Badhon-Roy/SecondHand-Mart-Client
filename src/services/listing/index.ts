@@ -17,34 +17,59 @@ export const addListing = async (listingData: FieldValues) => {
     return res.json();
 }
 
-export const getAllListing = async (page?: string, limit?: string, query?: { [key: string]: string | string[] | undefined }) => {
-    const params = new URLSearchParams();
-    if (query?.price) {
-        params.append('minPrice', '0')
-        params.append('maxPrice', query?.price.toString())
-    }
-    if (query?.category) {
-        params.append('categories', query?.category.toString())
-    }
-    if (query?.condition) {
-        params.append('conditions', query?.condition.toString())
-    }
-    if (query?.status) {
-        params.append('statuses', query?.status.toString())
-    }
-
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings?limit=${limit}&page=${page}&${params}`, {
-            next: {
-                tags: ["LISTING"]
-            }
-        })
-        const result = await res.json();
-        return result;
-    } catch (error: any) {
-        return Error(error)
-    }
-}
+export const getAllListing = async (
+    userId?: string,
+    page?: string,
+    limit?: number,
+    query?: { [key: string]: string | string[] | undefined }
+  ) => {
+      const params = new URLSearchParams();
+      if (query?.price) {
+          params.append('minPrice', '0');
+          params.append('maxPrice', query?.price.toString());
+      }
+      if (query?.category) {
+          params.append('categories', query?.category.toString());
+      }
+      if (query?.condition) {
+          params.append('conditions', query?.condition.toString());
+      }
+      if (query?.status) {
+          params.append('statuses', query?.status.toString());
+      }
+      let url = `${process.env.NEXT_PUBLIC_BASE_API}/listings`;
+      const queryParams: string[] = [];
+  
+      if (userId) queryParams.push(`userID=${userId}`);
+      if (limit) queryParams.push(`limit=${limit}`);
+      if (page) queryParams.push(`page=${page}`);
+  
+      // Append additional params from URLSearchParams
+      if (params.toString()) queryParams.push(params.toString());
+  
+      // Construct final URL
+      if (queryParams.length) {
+          url += `?${queryParams.join("&")}`;
+      }
+  
+      try {
+          const res = await fetch(url, {
+              next: {
+                  tags: ["LISTING"]
+              }
+          });
+  
+          if (!res.ok) {
+              throw new Error(`Error: ${res.status} ${res.statusText}`);
+          }
+  
+          return await res.json();
+      } catch (error) {
+          console.error("Fetch error:", error);
+          return [];
+      }
+  };
+  
 
 export const getSingleListing = async (id: string) => {
     try {

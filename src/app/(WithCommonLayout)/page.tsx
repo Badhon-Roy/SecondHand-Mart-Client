@@ -10,7 +10,7 @@ import { getAllListing } from "@/services/listing";
 
 const HomePage = async () => {
   const { data: categories } = await getAllCategory();
-  const { data: listings } = await getAllListing();
+  const {data : listings} = await getAllListing();
   return (
     <div className="container mx-auto">
       <div className="md:mx-0 mx-4">
