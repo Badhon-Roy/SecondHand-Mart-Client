@@ -44,11 +44,12 @@ const LoginForm = () => {
                 toast.success(res?.message, { id: toastLoading })
                 if (redirect) {
                     router.push(redirect)
-                    window.location.reload();
                 } else {
                     router.push('/')
-                    window.location.reload();
                 }
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
                 reset();
             } else {
                 toast.error(res?.message || "Something went wrong!", { id: toastLoading })
@@ -101,13 +102,14 @@ const LoginForm = () => {
                         />
 
 
-                        <div className="flex justify-end items-center">
+                        {/* <div className="flex justify-end items-center">
                             <ReCAPTCHA
                                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                                 onChange={handleReCaptcha}
                             />
-                        </div>
-                        <Button disabled={reCaptchaStatue ? false : true} type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                        </div> */}
+                        {/* disabled={reCaptchaStatue ? false : true} */}
+                        <Button type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                             {isSubmitting ? "Logging..." : "Login"}
                         </Button>
                         <p className="text-right pr-2 text-xl">Don't have an account <Link className="text-[#ff8e00] underline" href={'/register'}>Register</Link></p>

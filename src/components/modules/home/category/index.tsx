@@ -8,7 +8,7 @@ const Category = async ({ categories }: { categories: ICategory[] }) => {
 
     return (
         <div>
-            <div className="text-center mt-24">
+            <div className="text-center">
                 <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
                     Shop By Category
                 </h2>

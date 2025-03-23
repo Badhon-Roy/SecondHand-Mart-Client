@@ -24,7 +24,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
     const refurbishedProducts = listings?.filter(listing => listing?.condition === 'refurbished')
     return (
         <div>
-            <div className="text-center mt-24">
+            <div className="text-center">
                 <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
                    Explore By Condition
                 </h2>

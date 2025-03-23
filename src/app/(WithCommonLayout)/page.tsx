@@ -1,5 +1,6 @@
 import Banner from "@/components/modules/home/banner";
 import Category from "@/components/modules/home/category";
+import FaqSection from "@/components/modules/home/faq";
 import FeaturedProducts from "@/components/modules/home/FeaturedProducts";
 import ManageListingTabs from "@/components/modules/home/filterListingTabs";
 import { getAllCategory } from "@/services/category";
@@ -18,7 +19,7 @@ const HomePage = async () => {
         </div>
         <FeaturedProducts listings={listings || []} />
         <ManageListingTabs listings={listings || []} />
-       
+       <FaqSection/>
       </div>
     </div>
   );

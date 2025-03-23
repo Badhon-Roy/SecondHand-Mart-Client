@@ -11,33 +11,37 @@ import { IListing } from "@/types";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const ProductDetails = ({ listing ,senderID }: { listing: IListing , senderID : string }) => {
+const ProductDetails = ({ listing, senderID }: { listing: IListing, senderID: string }) => {
     const { _id, title, category, condition, description, images, price, status, userID } = listing;
-
+    const router = useRouter()
     const { user } = useUser();
     const form = useForm();
-
     const { formState: { isSubmitting }, reset } = form
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastLoading = toast.loading("Sending...")
         const modifiedData = {
-            message : data?.message,
-            senderID : senderID,
-            receiverID : userID?._id
-          }
-          
+            message: data?.message,
+            senderID: senderID,
+            receiverID: userID?._id
+        }
+
         try {
-            const res = await sendMessage(modifiedData)
-            console.log(res);
-            if (res.success) {
-                toast.success(res.message, { id: toastLoading })
-                reset();
-            } else if (res.err) {
-                toast.error(res?.message || "Something went wrong!", { id: toastLoading })
+            if (user?.email) {
+                const res = await sendMessage(modifiedData)
+                if (res.success) {
+                    toast.success(res.message, { id: toastLoading })
+                    reset();
+                } else if (res.err) {
+                    toast.error(res?.message || "Something went wrong!", { id: toastLoading })
+                }
+            } else {
+                toast.error("Login First!", { id: toastLoading })
+                router.push('/login')
             }
         } catch (error: any) {
             toast.error(error.message, { id: toastLoading })
@@ -60,6 +64,9 @@ const ProductDetails = ({ listing ,senderID }: { listing: IListing , senderID : 
                 } else {
                     toast.error(res.message, { id: toastLoading })
                 }
+            } else {
+                toast.error("Login First!", { id: toastLoading })
+                router.push('/login')
             }
         } catch (error: any) {
             toast.error(error.message, { id: toastLoading })
