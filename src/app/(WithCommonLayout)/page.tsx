@@ -1,16 +1,19 @@
 import Banner from "@/components/modules/home/banner";
+import Blog from "@/components/modules/home/blog";
 import Category from "@/components/modules/home/category";
 import ExclusiveOffers from "@/components/modules/home/exclusiveOffers";
 import FaqSection from "@/components/modules/home/faq";
 import FeaturedProducts from "@/components/modules/home/FeaturedProducts";
 import ManageListingTabs from "@/components/modules/home/filterListingTabs";
 import NewsletterSection from "@/components/modules/home/newsletterSection";
+import { getAllBlog } from "@/services/blog";
 import { getAllCategory } from "@/services/category";
 import { getAllListing } from "@/services/listing";
 
 const HomePage = async () => {
   const { data: categories } = await getAllCategory();
-  const {data : listings} = await getAllListing();
+  const { data: listings } = await getAllListing();
+  const { data: blogs } = await getAllBlog();
   return (
     <div className="container mx-auto">
       <div className="md:mx-0 mx-4">
@@ -21,8 +24,9 @@ const HomePage = async () => {
         </div>
         <FeaturedProducts listings={listings || []} />
         <ManageListingTabs listings={listings || []} />
-        <ExclusiveOffers listings={listings || []}/>
+        <ExclusiveOffers listings={listings || []} />
         <FaqSection />
+        <Blog blogs={blogs || []} />
         <NewsletterSection />
       </div>
     </div>

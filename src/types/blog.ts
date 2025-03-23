@@ -7,4 +7,6 @@ export interface IBlog{
     category: string,
     content: string,
     thumbnail: string,
+    createdAt: string
+    updatedAt: string
 }

@@ -1,4 +1,4 @@
-import ManageBlog from "@/components/modules/blog";
+import ManageBlogDashboard from "@/components/modules/blog";
 import { getCurrentUser } from "@/services/AuthService";
 import { getAllBlog } from "@/services/blog";
 import { IBlog } from "@/types";
@@ -9,7 +9,7 @@ const BlogPage = async () => {
     const filterBlogs = blogs?.filter((blog: IBlog) => blog?.user?.email === email)
     return (
         <div>
-            <ManageBlog blogs={filterBlogs || []} />
+            <ManageBlogDashboard blogs={filterBlogs || []} />
         </div>
     );
 };

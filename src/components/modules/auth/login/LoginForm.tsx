@@ -20,7 +20,7 @@ const LoginForm = () => {
     });
     const [reCaptchaStatue, setReCaptchaStatue] = useState(false)
 
-    const { formState: { isSubmitting }, reset } = form;
+    const { formState: { isSubmitting }, reset, setValue } = form;
     const searchParams = useSearchParams();
     const redirect = searchParams.get('redirectPath')
     const router = useRouter();
@@ -58,6 +58,14 @@ const LoginForm = () => {
             toast.error(error.message, { id: toastLoading })
         }
     }
+
+    const handleAsUser = () => {
+        setValue("email", "roybadhon2861@gmail.com");
+        setValue("password", "123456");
+        form.handleSubmit(onSubmit)();
+    }
+
+
     return (
         <div className="container mx-auto px-4 my-16 max-w-lg">
             <div className="p-8 rounded-xl shadow-xl space-y-6">
@@ -102,16 +110,23 @@ const LoginForm = () => {
                         />
 
 
-                        {/* <div className="flex justify-end items-center">
+                        <div className="flex justify-end items-center md:w-auto">
                             <ReCAPTCHA
                                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                                 onChange={handleReCaptcha}
                             />
-                        </div> */}
-                        {/* disabled={reCaptchaStatue ? false : true} */}
-                        <Button type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                        </div>
+                  
+                        <Button  disabled={reCaptchaStatue ? false : true} type="submit" className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                             {isSubmitting ? "Logging..." : "Login"}
                         </Button>
+                        <div>
+                            <div>
+                                <Button title="User credentials" onClick={handleAsUser} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                                    As a User
+                                </Button>
+                            </div>
+                        </div>
                         <p className="text-right pr-2 text-xl">Don't have an account <Link className="text-[#ff8e00] underline" href={'/register'}>Register</Link></p>
                     </form>
                 </Form>

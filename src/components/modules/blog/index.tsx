@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { deleteBlog } from "@/services/blog";
 
 
-const ManageBlog = ({ blogs }: { blogs: IBlog[] }) => {
+const ManageBlogDashboard = ({ blogs }: { blogs: IBlog[] }) => {
 
     const handleDelete = async (id: string) => {
         try {
@@ -94,4 +94,4 @@ const ManageBlog = ({ blogs }: { blogs: IBlog[] }) => {
     );
 };
 
-export default ManageBlog;
+export default ManageBlogDashboard;
