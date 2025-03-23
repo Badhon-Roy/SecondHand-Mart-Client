@@ -10,7 +10,7 @@ const Category = async ({ categories }: { categories: ICategory[] }) => {
         <div>
             <div className="text-center">
                 <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
-                    Shop By Category
+                Browse Categories
                 </h2>
                 <p className="md:text-lg mt-4 max-w-2xl mx-auto font-medium text-[#3f4343] mb-4">
                     Discover the best products across various categories. Shop your favorite items and enjoy seamless shopping today!

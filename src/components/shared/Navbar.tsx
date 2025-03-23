@@ -28,6 +28,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/products', label: 'Products' },
   { href: '/categories', label: 'Categories' },
+  { href: '/offers', label: 'Offers' },
 ];
 
 export default function Navbar() {

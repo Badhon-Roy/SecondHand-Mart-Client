@@ -2,16 +2,51 @@
 
 import { Button } from "@/components/ui/button";
 import { SHMTable } from "@/components/ui/core/SHMTable";
-import { deleteListing } from "@/services/listing";
+import { addDiscount, deleteListing } from "@/services/listing";
 import { IListing } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Trash } from "lucide-react";
+import { Edit, PlusSquare, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 
 const ManageListing = ({ listings }: { listings: IListing[] }) => {
+    const [discountId, setDiscountId] = useState<string | null>(null);
+    const form = useForm();
+    const { formState: { isSubmitting }, reset } = form;
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastLoading = toast.loading("Adding...");
+        const discount = parseInt(data?.discount);
+        try {
+            const res = await addDiscount(discountId as string, discount);
+            console.log(res);
+            if (res.success) {
+                toast.success(res.message, { id: toastLoading });
+                reset();
+                setDiscountId(null);
+            } else if (res.err) {
+                toast.error(res?.message || "Something went wrong!", { id: toastLoading });
+            }
+        } catch (error: any) {
+            toast.error(error.message, { id: toastLoading });
+        }
+    };
+
 
     const handleDelete = async (id: string) => {
         try {
@@ -21,8 +56,8 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
             } else if (res?.error) {
                 toast.error(res?.message || "Something went wrong")
             }
-        } catch (error : any) {
-            toast.error( error?.message ||"Something went wrong")
+        } catch (error: any) {
+            toast.error(error?.message || "Something went wrong")
         }
     };
 
@@ -48,7 +83,14 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
             header: () => <div>Price</div>,
             cell: ({ row }) => (
                 <div>
-                    <p>৳{row.original.price}</p>
+                    {
+                        row?.original?.discountPrice > 0 ? <div className="flex gap-2">
+                            <p>৳{row?.original?.discountPrice.toFixed(2)}</p>
+                            <p className="line-through">৳{row.original.price.toFixed(2)}</p>
+                        </div> : <div>
+                            <p>৳{row.original.price.toFixed(2)}</p>
+                        </div>
+                    }
                 </div>
             ),
         },
@@ -70,17 +112,75 @@ const ManageListing = ({ listings }: { listings: IListing[] }) => {
             ),
         },
         {
+            accessorKey: "discount",
+            header: () => <div>Add Discount</div>,
+            cell: ({ row }) => (
+                <div className="flex items-center space-x-2">
+                    {row.original.status === 'available' && (
+                        <div>
+                            {/* Button to trigger the dialog */}
+                            <div className="flex justify-end">
+                                <Button
+                                    onClick={() => setDiscountId(row?.original?._id)} // Set the discount ID
+                                    className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-2 py-1 rounded-[4px] text-white font-semibold shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer text-sm">
+                                    <PlusSquare /> Add Discount
+                                </Button>
+                            </div>
+
+                            {/* Open the modal if discountId is set */}
+                            <Dialog open={discountId === row.original?._id} onOpenChange={(open) => !open && setDiscountId(null)}>
+                                <DialogContent className="sm:max-w-[425px]">
+                                    <DialogHeader>
+                                        <DialogTitle className="text-center text-2xl text-[#ff6f00]">Add Discount</DialogTitle>
+                                    </DialogHeader>
+                                    <Form {...form}>
+                                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                                            <FormField
+                                                control={form.control}
+                                                name="discount"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className="text-lg font-medium">Discount</FormLabel>
+                                                        <FormControl>
+                                                            <Input
+                                                                type="number"
+                                                                required
+                                                                className="w-full py-5 px-4 rounded-[4px] shadow-md"
+                                                                placeholder="Enter discount"
+                                                                {...field}
+                                                                value={field.value || ''}
+                                                            />
+                                                        </FormControl>
+                                                        <FormMessage className="text-red-500" />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <Button
+                                                type="submit"
+                                                className="bg-gradient-to-r from-[#ffbe0c] w-full to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                                                {isSubmitting ? "Adding..." : "Add"}
+                                            </Button>
+                                        </form>
+                                    </Form>
+                                </DialogContent>
+                            </Dialog>
+                        </div>
+                    )}
+                </div>
+            ),
+        },
+        {
             accessorKey: "action",
             header: () => <div>Action</div>,
             cell: ({ row }) => (
                 <>
                     <Link href={`/user/dashboard/update-listing/${row.original?._id}`}>
-                    <button
-                        className="text-blue-500 cursor-pointer mr-8"
-                        title="Update"
-                    >
-                        <Edit className="w-5 h-5" />
-                    </button>
+                        <button
+                            className="text-blue-500 cursor-pointer mr-8"
+                            title="Update"
+                        >
+                            <Edit className="w-5 h-5" />
+                        </button>
                     </Link>
                     <button
                         className="text-red-500 cursor-pointer"

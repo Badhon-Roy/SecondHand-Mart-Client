@@ -1,0 +1,9 @@
+.banner {
+    background-image: url('https://img.freepik.com/free-vector/realistic-golden-sales-banner_52683-27851.jpg?ga=GA1.1.2122364497.1742731770&semt=ais_hybrid');
+    background-position: center;
+    width: 100%;
+    height: 250px;
+    padding: 8px;
+    position: relative;
+    overflow: hidden;
+}

@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: IListing }) => {
-    const { _id, title, price, images, status } = product;
+    const { _id, title, price, images, status,discountPrice } = product;
     const { user } = useUser();
     const router = useRouter();
 
@@ -37,7 +37,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
                 } else {
                     toast.error(res.message, { id: toastLoading })
                 }
-            }else{
+            } else {
                 toast.error('Firstly login now!', { id: toastLoading })
                 router.push('/login')
             }
@@ -90,11 +90,14 @@ const ProductCard = ({ product }: { product: IListing }) => {
                 </Link>
 
                 <div className="flex items-center justify-between my-2">
-                    <p className="text-sm text-gray-600">
-                        <span className="font-semibold text-lg text-[#ff8e00]">
-                        Price: ৳{price.toFixed(2)}
-                        </span>
-                    </p>
+                    {
+                        discountPrice > 0 ? <div className="flex gap-3 items-center">
+                            <p className="font-semibold text-lg text-[#ff8e00]">৳{discountPrice.toFixed(2)}</p>
+                            <p className="line-through text-lg">৳{price.toFixed(2)}</p>
+                        </div> : <div>
+                            <p className="font-semibold text-lg text-[#ff8e00]">৳{price.toFixed(2)}</p>
+                        </div>
+                    }
                 </div>
             </CardContent>
 
@@ -104,14 +107,14 @@ const ProductCard = ({ product }: { product: IListing }) => {
                         className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                         Add To Cart
                     </Button>
-                 {
-                    status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
-                          Sold Out
-                      </Button> :  <Link href={`/order/${_id}`}>
-                  <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
-                        Buy Now
-                    </Button></Link>
-                 }
+                    {
+                        status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
+                            Sold Out
+                        </Button> : <Link href={`/order/${_id}`}>
+                            <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
+                                Buy Now
+                            </Button></Link>
+                    }
                 </div>
             </CardFooter>
         </Card>

@@ -77,6 +77,27 @@ export const updateListing = async (id: string, data: FieldValues) => {
     }
 };
 
+export const addDiscount = async (id: string, discount: number) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/listings/add-discount/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                discount: discount,
+            }),
+        });
+        const updatedProduct = await res.json();
+        revalidateTag("LISTING");
+        return updatedProduct;
+    } catch (error: any) {
+        console.error("Error updating discount:", error);
+        return { error: error.message || "An error occurred" };
+    }
+};
+
+
 
 export const deleteListing = async (listingId: string) => {
     try {
