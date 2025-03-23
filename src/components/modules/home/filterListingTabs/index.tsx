@@ -44,9 +44,9 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
                         {
                             newProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                             {
-                                newProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
+                                newProducts?.slice(0,8)?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }
-                        </div>   : <p className="text-2xl font-bold text-center">No Product available now!</p>
+                        </div>   : <p className="text-2xl font-bold text-center my-16">No Product available now!</p>
                          }
                     </TabsContent>
                     <TabsContent value="used" className="mt-8">
@@ -55,7 +55,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
                             {
                                 usedProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }
-                        </div>   : <p className="text-2xl font-bold text-center">No Product available now!</p>
+                        </div>   : <p className="text-2xl font-bold text-center my-16">No Product available now!</p>
                          }
                     </TabsContent>
                     <TabsContent value="refurbished" className="mt-8">
@@ -64,7 +64,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
                             {
                                 refurbishedProducts?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }
-                        </div>   : <p className="text-2xl font-bold text-center">No Product available now!</p>
+                        </div>   : <p className="text-2xl font-bold text-center my-16">No Product available now!</p>
                          }
                     </TabsContent>
                 </Tabs>

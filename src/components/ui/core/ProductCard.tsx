@@ -85,7 +85,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
                         title={title}
                         className="font-semibold text-xl text-gray-800 cursor-pointer hover:text-[#ff8e00] transition-all"
                     >
-                        {title.length > 27 ? title.slice(0, 27) + "..." : title}
+                        {title.length > 27 ? title.slice(0, 27) + "-" : title}
                     </h2>
                 </Link>
 
@@ -102,11 +102,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
             </CardContent>
 
             <CardFooter className="block p-0 mt-2">
-                <div className="flex gap-2 items-center justify-between">
-                    <Button disabled={status === "sold"}
-                        className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
-                        Add To Cart
-                    </Button>
+                <div className="flex gap-2 items-center justify-end">
                     {
                         status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
                             Sold Out

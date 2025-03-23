@@ -55,6 +55,11 @@ const data = {
       icon: BadgeDollarSign,
     },
     {
+      title: "Blog Manage",
+      url: "/user/dashboard/blogs",
+      icon: NotebookTabs,
+    },
+    {
       title: "Message",
       url: "/user/dashboard/message",
       icon: BadgeDollarSign,
