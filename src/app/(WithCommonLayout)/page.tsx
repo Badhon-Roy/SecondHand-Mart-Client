@@ -33,8 +33,8 @@ const HomePage = async () => {
         <Smartwatch smartwatches={smartwatches}/>
         <ManageListingTabs listings={featuredProducts || []} />
         <ExclusiveOffers listings={listings || []} />
-        <FaqSection />
         <Blog blogs={blogs || []} />
+        <FaqSection />
         <NewsletterSection />
       </div>
     </div>

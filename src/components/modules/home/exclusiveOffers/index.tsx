@@ -66,7 +66,7 @@ const ExclusiveOffers = ({ listings }: { listings: IListing[] }) => {
                     <div key={listing?._id} className="md:p-3 p-1 bg-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl w-full border">
                         <CardHeader className="relative p-0 overflow-hidden">
                             <Image
-                                className="md:h-[200px] max-h-[100px] w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
+                                className="md:h-[200px] w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
                                 src={
                                     listing?.images[0] ||
                                     "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 import OfferImage from "../../../../app/assets/offerPoster.jpg"
+import Link from "next/link";
 
 
 
@@ -17,9 +18,10 @@ const Banner = () => {
                     <div className="flex-1 lg:mt-0 mt-4">
                         <h2 className="xl:text-[70px] md:text-[50px] text-[35px] font-bold lg:leading-16 md:leading-14 leading-8 md:text-start text-center"><span className="text-[#ff8e00]">Buy</span> & <span className="text-[#ff8e00]">Sell</span> <br /><span className="xl:text-[40px] md:text-[30px] text-[20px]"> Pre-loved Treasures</span></h2>
                         <p className="md:text-xl text-sm font-medium my-4">Discover a marketplace where you can buy and sell gently used items. Whether you&apos;re looking for a great deal or wanting to declutter, SecondHand makes it easy to give items a second life. Join today and find your next treasure!</p>
+                        <Link href={'/products'}> 
                         <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                             Shop Now
-                        </Button>
+                        </Button></Link>
                     </div>
                 </div>
             </div>

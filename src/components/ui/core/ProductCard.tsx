@@ -53,7 +53,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
                 )}
             <div className="relative p-0 md:h-[200px] overflow-hidden">
                 <Image
-                    className="md:rounded-t-lg md:h-[200px] h-[100px] w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105 md:hover:rounded-lg"
+                    className="rounded-t-lg md:h-[200px] h-[100px] w-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105 md:hover:rounded-lg"
                     src={
                         images[0] ||
                         "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
@@ -66,7 +66,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
 
                 {/* Sold Out Badge */}
                 {status === "sold" && (
-                    <div className="absolute top-6 left-2 bg-red-600 text-white text-sm font-semibold px-3 py-1 rounded-lg shadow-xl border-2 border-red-500 uppercase tracking-wide transform -translate-y-4 opacity-90 animate-fadeIn">
+                    <div className="absolute md:top-6 top-5 md:left-2 left-1 bg-red-600 text-white text-sm font-semibold md:px-3 px-1 md:py-1 rounded-lg shadow-xl border-2 border-red-500 uppercase tracking-wide transform -translate-y-4 opacity-90 animate-fadeIn">
                         Sold Out
                     </div>
                 )}
@@ -93,9 +93,9 @@ const ProductCard = ({ product }: { product: IListing }) => {
 
                 <div className="flex items-center justify-center md:justify-between my-2">
                     {
-                        discountPrice > 0 ? <div className="flex gap-3 items-center">
+                        discountPrice > 0 ? <div className="md:flex gap-3 items-center">
                             <p className="md:font-semibold md:text-lg text-[#ff8e00]">৳{discountPrice.toFixed(2)}</p>
-                            <p className="line-through text-lg">৳{price.toFixed(2)}</p>
+                            <p className="line-through md:text-lg">৳{price.toFixed(2)}</p>
                         </div> : <div>
                             <p className="md:font-semibold md:text-lg text-[#ff8e00]">৳{price.toFixed(2)}</p>
                         </div>
@@ -106,7 +106,7 @@ const ProductCard = ({ product }: { product: IListing }) => {
             <div className="block p-0 mt-2">
                 <div className="flex gap-2 items-center justify-end">
                     {
-                        status === 'sold' ? <Button disabled={status === 'sold'} className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-5 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
+                        status === 'sold' ? <Button disabled={status === 'sold'} className="md:flex hidden bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-5 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">
                             Sold Out
                         </Button> : <Link href={`/order/${_id}`}>
                             <Button className="md:flex hidden bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-4 py-5 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none">

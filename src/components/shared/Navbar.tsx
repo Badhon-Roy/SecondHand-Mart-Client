@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Heart, LayoutDashboard, LogOut, Menu, Search, User, X } from 'lucide-react';
+import { ChevronDown, Heart, LayoutDashboard, LogOut, Menu, Search, User, X } from 'lucide-react';
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import Image from 'next/image';
 import {
@@ -18,26 +18,29 @@ import { Button } from '../ui/button';
 import { logout } from '@/services/AuthService';
 import { useUser } from '@/context/UserContext';
 import { getAllListing } from '@/services/listing';
-import { IListing } from '@/types';
+import { ICategory, IListing } from '@/types';
 import { protectedRotes } from '@/constants';
 import logoImage from "../../app/assets/logo.png"
+import { motion } from "motion/react"
+import { getAllCategory } from '@/services/category';
 
 
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/products', label: 'Products' },
-  { href: '/categories', label: 'Categories' },
   { href: '/offers', label: 'Offers' },
   { href: '/blogs', label: 'Blogs' },
 ];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const { user, setIsLoading } = useUser();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const router = useRouter();
 
@@ -54,6 +57,19 @@ export default function Navbar() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchCategoriesData = async () => {
+      try {
+        const { data } = await getAllCategory();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
+    };
+
+    fetchCategoriesData();
+  }, []);
+
   // Filter products based on query
   useEffect(() => {
     if (query) {
@@ -65,6 +81,7 @@ export default function Navbar() {
       setFilteredData([]);
     }
   }, [query, data]);
+
 
   // Handle navigation & clear search
   const handleSelectProduct = (productId: string) => {
@@ -82,7 +99,7 @@ export default function Navbar() {
   const handleLogOut = () => {
     logout();
     setIsLoading(true)
-    if(protectedRotes?.some(route => pathname.match(route))){
+    if (protectedRotes?.some(route => pathname.match(route))) {
       router.push('/')
     }
   }
@@ -145,16 +162,67 @@ export default function Navbar() {
 
 
         {/* Desktop Navbar */}
-        <div className="hidden lg:flex space-x-4">
+        <div className="hidden lg:flex">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`px-4 py-2 rounded-md transition-colors ${pathname === href ? 'text-[#ff8e00] font-bold text-xl' : 'font-medium text-xl'}`}
+              className={`xl:px-4 lg:px-3 py-2 rounded-md transition-colors ${pathname === href ? 'text-[#ff8e00] font-bold text-xl' : 'font-medium text-xl'}`}
             >
               {label}
             </Link>
           ))}
+
+
+          <div className="relative group">
+            <button
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+              className="flex items-center gap-1 xl:px-4 lg:px-3 py-2 rounded-md transition-all text-xl font-medium hover:text-[#ff8e00]"
+            >
+              Categories <ChevronDown size={18} />
+            </button>
+
+            {/* Mega Menu Dropdown */}
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                className="absolute -left-70 w-[500px] bg-white/10 backdrop-blur-2xl shadow-xl border border-white/30 rounded-lg z-50 p-6"
+              >
+                <div>
+                  <div>
+                    <h2 className='text-xl font-bold text-black text-center mb-2'>Explore Category</h2>
+                    <hr />
+                  </div>
+                  <div className="grid grid-cols-3 gap-4 mt-2">
+                    {categories?.slice(0, 12)?.map((category: ICategory) => (
+                      <div key={category?._id}>
+                        <Link
+                          href={`/products?category=${category?._id}`}
+                          className="flex items-center gap-2 p-3 rounded-lg transition-all hover:bg-white/20 hover:text-[#ff8e00]"
+                        >
+                          <Image
+                            className="rounded-full object-cover w-[40px] h-[40px] shadow-md"
+                            src={category?.image}
+                            alt={category?.name}
+                            width={60}
+                            height={60}
+                          />
+                          <h2 className="font-medium " >{category?.name}</h2>
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+
 
           {
             user && user?.email ? <div className='z-[100]'>
@@ -221,7 +289,7 @@ export default function Navbar() {
                     <input
                       type="text"
                       value={query}
-                      onChange={(e) => {setQuery(e.target.value)}}
+                      onChange={(e) => { setQuery(e.target.value) }}
                       placeholder="Search for products..."
                       className="md:flex-1 py-2 px-1 focus:outline-none w-full"
                     />
@@ -257,6 +325,13 @@ export default function Navbar() {
                   </Link>
                 ))}
 
+                <Link
+                  href='/categories'
+                  className={`block px-4 py-2 text-lg rounded-md transition-colors ${pathname === '/categories' ? 'bg-white text-black' : 'hover:bg-white/20'}`}
+                  onClick={handleClose}
+                >
+                  Categories
+                </Link>
 
                 {
                   user && user?.email ? <div>
