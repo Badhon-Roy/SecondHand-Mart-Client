@@ -9,17 +9,17 @@ const Category = async ({ categories }: { categories: ICategory[] }) => {
     return (
         <div>
             <div className="text-center">
-                <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
+                <h2 className="lg:text-[56px] md:text-[40px] text-[25px] font-extrabold text-[#ff8e00]">
                 Browse Categories
                 </h2>
-                <p className="md:text-lg mt-4 max-w-2xl mx-auto font-medium text-[#3f4343] mb-4">
+                <p className="md:text-lg text-sm mt-4 max-w-2xl mx-auto font-medium text-[#3f4343] mb-4">
                     Discover the best products across various categories. Shop your favorite items and enjoy seamless shopping today!
                 </p>
             </div>
             <div className="flex justify-between items-center">
                 <h2 className="md:text-2xl text-xl font-bold">Category</h2>
                 <Link href={'/categories'}>
-                <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] md:px-8 md:py-6 px-2 md:text-[18px]  rounded-[4px] text-white font-semibold shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                     All Category
                 </Button></Link>
             </div>

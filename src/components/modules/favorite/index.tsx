@@ -25,14 +25,14 @@ const ManageFavoriteProducts = ({ favoriteProducts, meta }: { favoriteProducts: 
         }
     }
     return (
-        <div>
+        <div className="my-8">
             <div className="w-full rounded-lg border-2 p-2 border-[#ff8e00]">
-                <div className={`${styles.banner}  text-center flex justify-center items-center rounded-lg`} >
-                    <div>
-                        <h2 className="md:text-3xl text-2xl font-bold text-white">
+                <div className={`${styles.banner} md:h-[250px] text-center flex justify-center items-center rounded-lg`} >
+                    <div className="md:py-0 py-8">
+                        <h2 className="md:text-3xl text-xl font-bold text-white">
                             Favorite Products
                         </h2>
-                        <p className="text-white mt-2 font-medium md:text-xl">
+                        <p className="text-white mt-2 font-medium md:text-xl text-sm">
                             Discover a wide range of products available at the best prices, handpicked just for you!
                         </p>
                     </div>

@@ -25,10 +25,10 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
     return (
         <div>
             <div className="text-center">
-                <h2 className="lg:text-[56px] md:text-[40px] text-[30px] font-extrabold text-[#ff8e00]">
+                <h2 className="lg:text-[56px] md:text-[40px] text-[25px] font-extrabold text-[#ff8e00]">
                    Explore By Condition
                 </h2>
-                <p className="md:text-lg mt-4 max-w-2xl mx-auto font-medium text-[#3f4343]">
+                <p className="md:text-lg text-sm mt-4 max-w-2xl mx-auto font-medium text-[#3f4343]">
                     Discover the best products across various categories. Shop your favorite items and enjoy seamless shopping today!
                 </p>
             </div>
@@ -42,7 +42,7 @@ const ManageListingTabs = ({ listings }: { listings: IListing[] }) => {
 
                     <TabsContent value="new" className="mt-8">
                         {
-                            newProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+                            newProducts?.length > 0 ? <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 md:gap-6 gap-3">
                             {
                                 newProducts?.slice(0,8)?.map(product => <ProductCard product={product} key={product?._id}></ProductCard>)
                             }

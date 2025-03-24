@@ -11,12 +11,12 @@ const ManageAllBlogs = ({ blogs, meta }: { blogs: IBlog[], meta : IMeta }) => {
     return (
         <div className="container mx-auto mt-8">
             <div className="w-full rounded-lg border-2 p-2 border-[#ff8e00]">
-                <div className={`${styles.banner}  text-center flex justify-center items-center rounded-lg`} >
-                    <div>
-                        <h2 className="md:text-3xl text-2xl font-bold text-white">
+                <div className={`${styles.banner} md:h-[250px] text-center flex justify-center items-center rounded-lg`} >
+                    <div className="md:py-0 py-8">
+                        <h2 className="md:text-3xl text-xl font-bold text-[#ff8e00]">
                             All Blogs
                         </h2>
-                        <p className="text-white mt-2 font-medium md:text-xl">
+                        <p className="text-white mt-2 font-medium md:text-xl text-sm">
                             Explore all Blogs for more information and  buy or sell any products.
                         </p>
                     </div>

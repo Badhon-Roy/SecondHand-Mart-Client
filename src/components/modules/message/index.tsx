@@ -84,9 +84,9 @@ const ManageMessage = ({ messages, senderID }: { messages: IMessage[], senderID:
 
                                 {/* Message Content */}
                                 <div className="flex-1">
-                                    <p className="text-xl font-semibold">{message.senderID?.name}</p>
-                                    <p className="text-gray-700">{message?.message}</p>
-                                    <p>{new Date(message?.createdAt).toLocaleString()}</p>
+                                    <p className="md:text-xl font-semibold">{message.senderID?.name}</p>
+                                    <p className="text-gray-700 md:text-[16px] text-sm">{message?.message}</p>
+                                    <p className='md:text-[16px] text-sm mb-2'>{new Date(message?.createdAt).toLocaleString()}</p>
 
                                 </div>
                                 <div>

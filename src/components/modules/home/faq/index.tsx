@@ -9,17 +9,17 @@ const FaqSection = () => {
     return (
         <section className="flex flex-col items-center justify-center md:px-6 px-4">
             <div>
-                <h2 className="lg:text-[56px] md:text-[40px] text-[30px] text-center font-extrabold text-[#ff8e00]">
+                <h2 className="lg:text-[56px] md:text-[40px] text-[25px] text-center font-extrabold text-[#ff8e00]">
                     Frequently Asked Questions
                 </h2>
-                <Accordion type="single" collapsible className="md:space-y-4 md:w-3/4 mx-auto space-y-2 mt-8 grid lg:grid-cols-2 gap-4">
+                <Accordion type="single" collapsible className="md:space-y-4 md:w-3/4 mx-auto space-y-2 mt-8 grid lg:grid-cols-2 md:gap-4 gap-2">
                     {faqData.map((faq, index) => (
                         <AccordionItem
                             key={index}
                             value={`item-${index + 1}`}
                             className="group bg-white/20 hover:bg-white/30 transition duration-300 rounded-xl p-5 shadow-md border border-white/30"
                         >
-                            <AccordionTrigger className="text-gray-800  text-lg font-semibold flex justify-between items-center">
+                            <AccordionTrigger className="text-gray-800  md:text-lg font-semibold flex justify-between items-center">
                                 {faq.question}
                             </AccordionTrigger>
                             <AccordionContent className="text-gray-700 mt-2">

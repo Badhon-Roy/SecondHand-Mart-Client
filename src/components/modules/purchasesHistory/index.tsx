@@ -68,7 +68,7 @@ const MangePurchasesHistory = ({ orders }: { orders: IPurchaseHistory[] }) => {
 
     return (
         <div>
-            <h2 className="md:text-2xl font-bold text-[#ff6f00]">View Purchase History</h2>
+            <h2 className="md:text-2xl text-xl font-bold text-[#ff6f00]">View Purchase History</h2>
             <div className="mt-4">
                 <SHMTable data={orders} columns={columns} />
             </div>

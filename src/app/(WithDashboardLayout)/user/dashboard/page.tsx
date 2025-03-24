@@ -32,8 +32,8 @@ const UserDashboard = async () => {
     <div className="py-6 px-4">
       {/* Dashboard Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-[#ff8e00]">Welcome to Your Dashboard</h1>
-        <p className="text-lg text-gray-600 mt-2">Manage your profile, products, and orders</p>
+        <h1 className="lg:text-4xl text-2xl font-bold text-[#ff8e00]">Welcome to Your Dashboard</h1>
+        <p className="md:text-lg text-gray-600 mt-2">Manage your profile, products, and orders</p>
       </div>
 
       {/* Profile and Stats Section */}

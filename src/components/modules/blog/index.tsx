@@ -81,9 +81,9 @@ const ManageBlogDashboard = ({ blogs }: { blogs: IBlog[] }) => {
     return (
         <div>
             <div className="flex justify-between items-center gap-8">
-                <h2 className="md:text-2xl font-bold text-[#ff6f00]">Manage Blog</h2>
+                <h2 className="md:text-2xl text-xl font-bold text-[#ff6f00]">Manage Blog</h2>
                 <Link href={'/user/dashboard/add-blog'}>
-                    <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] px-8 py-6 rounded-[4px] text-white font-semibold text-[18px] shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
+                    <Button className="bg-gradient-to-r from-[#ffbe0c] to-[#ff8e00] md:px-8 md:py-6 px-2 md:text-[18px]  rounded-[4px] text-white font-semibold shadow-md transform transition-transform duration-300 hover:scale-105 hover:from-[#e9a912] hover:to-[#ff6f00] hover:shadow-lg active:scale-95 focus:outline-none cursor-pointer">
                         Add Blog
                     </Button></Link>
             </div>
