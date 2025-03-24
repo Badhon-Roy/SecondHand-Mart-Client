@@ -1,7 +1,10 @@
+import { BarChartLayout } from "@/components/modules/dashboard/chart/BarChart";
+import { Chart } from "@/components/modules/dashboard/chart/chart";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { getAllFavorite } from "@/services/addToFavorite";
 import { getAllUser, getCurrentUser } from "@/services/AuthService";
+import { getAllBlog } from "@/services/blog";
 import { getAllListing } from "@/services/listing";
 import { getPurchasesHistory, getSalesHistory } from "@/services/order";
 import { IListing, IUser } from "@/types";
@@ -14,6 +17,16 @@ const UserDashboard = async () => {
   const { data: favorites } = await getAllFavorite(presentUser?.email);
   const { data: purchasesHistory } = await getPurchasesHistory(presentUser?._id);
   const { data: salesHistory } = await getSalesHistory(presentUser?._id);
+  const {data : blogs} = await getAllBlog(user?.userId)
+
+
+  const chartData = [
+    { browser: "listing", history: products?.length, fill: "var(--color-listing)" },
+    { browser: "favorite", history: favorites?.length, fill: "var(--color-favorite)" },
+    { browser: "purchases", history: purchasesHistory?.length, fill: "var(--color-purchases)" },
+    { browser: "sales", history: salesHistory?.length, fill: "var(--color-sales)" },
+    { browser: "blogs", history: blogs?.length, fill: "var(--color-blogs)" },
+  ]
 
   return (
     <div className="py-6 px-4">
@@ -55,6 +68,8 @@ const UserDashboard = async () => {
             <h2 className="text-gray-100">You have {salesHistory?.length} past sales</h2>
           </div>
         </Card>
+        <Chart chartData={chartData}/>
+        <BarChartLayout chartData={chartData} />
       </div>
 
       {/* Profile Summary and Actions */}

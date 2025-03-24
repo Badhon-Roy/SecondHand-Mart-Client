@@ -1,8 +1,10 @@
-import { ICategory } from "@/types";
+"use client"
+import { ICategory, IMeta } from "@/types";
 import styles from "./category.module.css"
 import CategoryCard from "@/components/ui/core/CategoryCard";
+import TablePagination from "@/components/ui/core/SHMTable/TablePagination";
 
-const ManageCategory = ({categories}: {categories : ICategory[]}) => {
+const ManageCategory = ({categories, meta}: {categories : ICategory[], meta : IMeta}) => {
     return (
         <div className="container mx-auto my-8">
         <div className="w-full rounded-lg border-2 p-2 border-[#ff8e00]">
@@ -24,6 +26,7 @@ const ManageCategory = ({categories}: {categories : ICategory[]}) => {
                 ))}
             </div>
         </div>
+        <TablePagination totalPage={meta?.totalPage || 1}/>
     </div>
     );
 };

@@ -61,21 +61,7 @@ const MangePurchasesHistory = ({ orders }: { orders: IPurchaseHistory[] }) => {
                     <p>{new Date(row?.original?.createdAt).toLocaleString()}</p>
                 </div>
             ),
-        },
-        {
-            accessorKey: "action",
-            header: () => <div>Action</div>,
-            cell: ({ row }) => (
-                <>
-                    <button
-                        className="text-red-500 cursor-pointer"
-                        title="Delete"
-                    >
-                        <Trash className="w-5 h-5" />
-                    </button>
-                </>
-            ),
-        },
+        }
     ];
 
 

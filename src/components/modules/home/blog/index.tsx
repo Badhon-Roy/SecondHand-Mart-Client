@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Blog = ({ blogs }: { blogs: IBlog[] }) => {
     return (
-        <div className="mb-16">
+        <div className="my-16">
             <h2 className="lg:text-[56px] md:text-[40px] text-[30px] text-center font-extrabold text-[#ff8e00]">
                 Latest Blog Posts
             </h2>

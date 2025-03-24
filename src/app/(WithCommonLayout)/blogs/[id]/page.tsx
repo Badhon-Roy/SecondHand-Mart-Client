@@ -1,8 +1,8 @@
 import { getSingleBlog } from "@/services/blog";
 import Image from "next/image";
 
-const BlogDetailsPage = async ({ params }: { params: { id: string } }) => {
-    const { id } = params;
+const BlogDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+    const { id } = await params;
     const { data: blog } = await getSingleBlog(id);
     
     if (!blog) {

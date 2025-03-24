@@ -7,7 +7,7 @@ import {
 
 const FaqSection = () => {
     return (
-        <section className="flex flex-col items-center justify-center py-20 md:px-6 px-4">
+        <section className="flex flex-col items-center justify-center md:px-6 px-4">
             <div>
                 <h2 className="lg:text-[56px] md:text-[40px] text-[30px] text-center font-extrabold text-[#ff8e00]">
                     Frequently Asked Questions

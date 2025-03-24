@@ -3,8 +3,7 @@ import { getAllCategory } from "@/services/category";
 import { getAllListing } from "@/services/listing";
 import { IListing } from "@/types";
 
-type TSeachParams = Promise<{ [key: string]: string | string[] | undefined }>
-const OffersPage = async ({ searchParams }: { searchParams: TSeachParams }) => {
+const OffersPage = async ({ searchParams }: { searchParams: Promise<{ page: string }> }) => {
     const query = await searchParams;
     const { data: listings } = await getAllListing(undefined, undefined, undefined, query);
     const { data: categories } = await getAllCategory();
@@ -12,7 +11,7 @@ const OffersPage = async ({ searchParams }: { searchParams: TSeachParams }) => {
     return (
         <div className="container mx-auto">
             <div className="md:mx-0 mx-4">
-                <ManageOffers products={products || []} categories={categories || []} />
+                <ManageOffers products={products || []} categories={categories || []}/>
             </div>
         </div>
     );

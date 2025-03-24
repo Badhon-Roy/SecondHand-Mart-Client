@@ -19,7 +19,7 @@ export const addListing = async (listingData: FieldValues) => {
 
 export const getAllListing = async (
     userId?: string,
-    page?: string,
+    page?: number,
     limit?: number,
     query?: { [key: string]: string | string[] | undefined }
   ) => {

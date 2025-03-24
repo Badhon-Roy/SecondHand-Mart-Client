@@ -1,5 +1,5 @@
 "use client"
-import { IFavorite } from "@/types";
+import { IFavorite, IMeta } from "@/types";
 import styles from "./favorite.module.css"
 import Image from "next/image";
 import { CheckCircle } from "lucide-react";
@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { deleteFavorite } from "@/services/addToFavorite";
 import Link from "next/link";
+import TablePagination from "@/components/ui/core/SHMTable/TablePagination";
 
-const ManageFavoriteProducts = ({ favoriteProducts }: { favoriteProducts: IFavorite[] }) => {
+const ManageFavoriteProducts = ({ favoriteProducts, meta }: { favoriteProducts: IFavorite[], meta :IMeta }) => {
 
     const handleDelete = async (id: string) => {
         const toastLoading = toast.loading("Deleting...")
@@ -73,6 +74,10 @@ const ManageFavoriteProducts = ({ favoriteProducts }: { favoriteProducts: IFavor
                     </Link>
                 </div>
             }
+
+            <div>
+                <TablePagination totalPage={meta?.totalPage || 1}/>
+            </div>
         </div>
     );
 };

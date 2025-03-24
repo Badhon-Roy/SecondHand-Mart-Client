@@ -1,12 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { IBlog } from "@/types";
+import { IBlog, IMeta } from "@/types";
 import Image from "next/image";
 import styles from "./blog.module.css"
 import Link from "next/link";
+import TablePagination from "@/components/ui/core/SHMTable/TablePagination";
 
 
-const ManageAllBlogs = ({ blogs }: { blogs: IBlog[] }) => {
+const ManageAllBlogs = ({ blogs, meta }: { blogs: IBlog[], meta : IMeta }) => {
     return (
         <div className="container mx-auto mt-8">
             <div className="w-full rounded-lg border-2 p-2 border-[#ff8e00]">
@@ -21,9 +22,9 @@ const ManageAllBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                     </div>
                 </div>
             </div>
-            <div className=" my-8 grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+            <div className=" my-8 grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4">
                 {
-                    blogs?.slice(0, 3)?.map(blog => (
+                    blogs?.map(blog => (
                         <div key={blog?._id} className="relative border shadow-lg rounded-lg hover:shadow-xl">
                             <p className="absolute top-2 left-2 bg-[#ff8e00] px-2 text-white rounded font-medium">{blog?.category}</p>
                             <Image className="w-full h-[200px] object-cover rounded-t-lg" src={blog?.thumbnail} alt={blog?.title} width={500} height={250}></Image>
@@ -53,6 +54,7 @@ const ManageAllBlogs = ({ blogs }: { blogs: IBlog[] }) => {
                     ))
                 }
             </div>
+            <TablePagination totalPage={meta?.totalPage || 1}/>
         </div>
     );
 };
